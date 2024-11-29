@@ -1,42 +1,43 @@
 import React from "react";
 import { SafeAreaView, View, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import SettingNext from "../components/SettingNext";
 import SettingSwitch from "../components/SettingSwitch";
 
+type RootStackParamList = {
+  RessetPassScreen: undefined;
+  AccountSecurityScreen: undefined;
+};
+
 const AccountSecurity: React.FC = () => {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-        {/* Các thiết lập */}
-        <SettingNext text="Đổi mật khẩu" leftIconName="lock-reset" />
+        <SettingNext
+          text="Đổi mật khẩu"
+          leftIconName="lock-reset"
+          onPress={() => navigation.navigate("RessetPassScreen")}
+        />
         <SettingSwitch
           text="Xác thực 2 yếu tố"
           leftIconName="shield-check-outline"
         />
-
-        {/* Khoảng cách phía dưới */}
-        <View style={styles.bottomSpacing} />
+        <View style={{ marginBottom: 1000 }} />
       </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  // Container bao quanh toàn bộ màn hình, với padding cho các viền
   container: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#fcfcfc",
   },
-
-  // Nội dung bên trong, ví dụ các phần tử chính của màn hình
   content: {
     paddingHorizontal: 18,
-    paddingTop: 20, // Có thể tùy chỉnh theo yêu cầu
-  },
-
-  // Khoảng cách phía dưới
-  bottomSpacing: {
-    marginBottom: 1000,
+    paddingTop: 20,
   },
 });
 

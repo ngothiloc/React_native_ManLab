@@ -6,6 +6,9 @@ import { StackNavigationProp } from "@react-navigation/stack";
 type RootStackParamList = {
   ProfileScreen: undefined;
   AccountSecurityScreen: undefined;
+  EditCompanyScreen: undefined;
+  EditPersonalScreen: undefined;
+  SettingScreen: undefined;
 };
 const ProfileScreen = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -13,8 +16,26 @@ const ProfileScreen = () => {
     <View>
       <Text> Đây là trang Profile Screen </Text>
       <TouchableOpacity
+        onPress={() => navigation.navigate("EditCompanyScreen")}
+      >
+        <Text> Thông tin tổ chức </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("EditPersonalScreen")}
+      >
+        <Text> Thông tin cá nhân </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={() => navigation.navigate("AccountSecurityScreen")}
       >
+        <Text> Bảo mật tài khoản </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("AccountSecurityScreen")}
+      >
+        <Text> Lịch sử thực hiện </Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("SettingScreen")}>
         <Text> Cài đặt </Text>
       </TouchableOpacity>
     </View>

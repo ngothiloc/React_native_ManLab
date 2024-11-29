@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 interface SettingNextProps {
   text: string;
@@ -8,6 +9,7 @@ interface SettingNextProps {
   rightIconName?: keyof typeof MaterialCommunityIcons.glyphMap;
   leftIconColor?: string;
   rightIconColor?: string;
+  onPress?: () => void;
 }
 
 const SettingNext: React.FC<SettingNextProps> = ({
@@ -16,9 +18,15 @@ const SettingNext: React.FC<SettingNextProps> = ({
   rightIconName = "keyboard-backspace",
   leftIconColor = "#303030",
   rightIconColor = "#303030",
+  onPress,
 }) => {
+  const navigation = useNavigation();
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      onPress={onPress ? onPress : () => {}}
+      style={styles.container}
+    >
       <View style={styles.leftContent}>
         {leftIconName && (
           <MaterialCommunityIcons
@@ -37,7 +45,7 @@ const SettingNext: React.FC<SettingNextProps> = ({
           style={{ transform: [{ scaleX: -1 }] }}
         />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
