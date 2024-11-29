@@ -1,18 +1,8 @@
 import React, { useState } from "react";
-import { ScrollView } from "react-native-gesture-handler";
+import { View, StyleSheet, Text, Alert } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  Keyboard,
-  SafeAreaView,
-  Alert,
-} from "react-native";
 import ChoseAvatar from "../components/ChoseAvatar"; // Đường dẫn cần chính xác
 import Nut from "../components/Nut";
-import TitleHeder from "../components/TitleHeder";
 import Tieude from "../components/Tieude";
 import DienTT from "../components/DienTT";
 import DropdownComponent from "../components/DropdownComponent";
@@ -44,79 +34,98 @@ const EditPersonalScreen = () => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={{ paddingHorizontal: 25, backgroundColor: "#ffffff" }}>
+    <KeyboardAwareScrollView
+      style={{ flex: 1, backgroundColor: "#ffffff" }}
+      contentContainerStyle={{ flexGrow: 1, paddingTop: 15 }}
+      enableOnAndroid={true}
+      extraScrollHeight={100}
+      keyboardShouldPersistTaps="handled"
+    >
+      <View style={{ paddingHorizontal: 25 }}>
+        {/* Avatar */}
         <View style={styles.container}>
           <ChoseAvatar />
         </View>
+
+        {/* Thông tin */}
         <Tieude text="Thông tin" />
-        <ScrollView>
-          <KeyboardAwareScrollView>
-            <View>
-              <Text style={styles.titleInput}>Họ và tên</Text>
-              <DienTT
-                text="Họ và tên"
-                leftIconName="account-edit-outline"
-                keyboardType="default"
-              />
+        <Text style={styles.titleInput}>Họ và tên</Text>
+        <DienTT
+          text="Tên tổ chức"
+          leftIconName="account-edit-outline"
+          keyboardType="default"
+        />
 
-              <Text style={[styles.titleInput, { marginTop: 10 }]}>Email</Text>
-              <DienTT
-                text="Emai"
-                leftIconName="email-outline"
-                keyboardType="email-address"
-              />
+        <Text style={[styles.titleInput, { marginTop: 10 }]}>Email</Text>
+        <DienTT
+          text="Emai"
+          leftIconName="email-outline"
+          keyboardType="email-address"
+        />
 
-              <Text style={[styles.titleInput, { marginTop: 10 }]}>
-                Số điện thoại
-              </Text>
-              <DienTT
-                text="Số điện thoại"
-                leftIconName="format-list-numbered"
-                keyboardType="phone-pad"
-              />
+        <Text style={[styles.titleInput, { marginTop: 10 }]}>
+          Số điện thoại
+        </Text>
+        <DienTT
+          text="Số điện thoại"
+          leftIconName="format-list-numbered"
+          keyboardType="phone-pad"
+        />
 
-              <Text style={[styles.titleInput, { marginTop: 10 }]}>
-                Giới tính
-              </Text>
-              <DropdownComponent
-                data={dataSex}
-                placeholder="Chọn giới tính"
-                onValueChange={handleValueChange}
-                searchEnabled={false}
-                iconName="account-search-outline"
-              />
+        {/* Địa chỉ */}
+        <Tieude text="Địa chỉ" />
+        <Text style={styles.titleInput}>Tỉnh / Thành phố</Text>
+        <DropdownComponent
+          data={dataSex}
+          placeholder="Tỉnh / Thành phố"
+          onValueChange={handleValueChange}
+          searchEnabled={false}
+          iconName="account-search-outline"
+        />
 
-              <Text style={[styles.titleInput, { marginTop: 10 }]}>
-                Chức vụ
-              </Text>
-              <DropdownComponent
-                data={dataPosition}
-                placeholder="Chức vụ"
-                onValueChange={handleValueChange2}
-                searchEnabled={true}
-                iconName="account-search-outline"
-              />
-            </View>
-            <Nut
-              text="Cập nhật"
-              onPress={() =>
-                Alert.alert("Thông báo", "Cập nhật thông tin thành công")
-              }
-            />
-          </KeyboardAwareScrollView>
-        </ScrollView>
+        <Text style={[styles.titleInput, { marginTop: 10 }]}>Quận / Huyện</Text>
+        <DropdownComponent
+          data={dataPosition}
+          placeholder="Quận / Huyện"
+          onValueChange={handleValueChange2}
+          searchEnabled={true}
+          iconName="account-search-outline"
+        />
 
-        <View style={{ margin: 100 }}></View>
+        <Text style={[styles.titleInput, { marginTop: 10 }]}>Phường / Xã</Text>
+        <DropdownComponent
+          data={dataPosition}
+          placeholder="Phường / Xã"
+          onValueChange={handleValueChange2}
+          searchEnabled={true}
+          iconName="account-search-outline"
+        />
+
+        <Text style={[styles.titleInput, { marginTop: 10 }]}>
+          Địa chỉ cụ thể
+        </Text>
+        <DienTT
+          text="Địa chỉ cụ thể: số nhà/thôn/xóm/..."
+          leftIconName="account-edit-outline"
+          keyboardType="default"
+        />
+
+        {/* Nút Cập nhật */}
+        <Nut
+          text="Cập nhật"
+          onPress={() =>
+            Alert.alert("Thông báo", "Cập nhật thông tin thành công")
+          }
+        />
       </View>
-    </TouchableWithoutFeedback>
+    </KeyboardAwareScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     alignItems: "center",
+    marginBottom: 15,
   },
   titleInput: {
     marginHorizontal: 5,

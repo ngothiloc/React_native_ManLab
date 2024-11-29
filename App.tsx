@@ -10,6 +10,7 @@ import HomeScreen from "./screens/HomeScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import EditPersonalScreen from "./screens/EditPersonalScreen";
+import EditCompanyScreen from "./screens/EditCompanyScreen";
 
 const Stack = createStackNavigator();
 export default function App() {
@@ -39,12 +40,16 @@ export default function App() {
           component={ProfileScreen}
         ></Stack.Screen>
         <Stack.Screen
-          name="AccountSecurityScreen"
+          name="Bảo mật tài khoản"
           component={AccountSecurityScreen}
         ></Stack.Screen>
         <Stack.Screen
           name="Sửa thông tin cá nhân"
           component={EditPersonalScreen}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Sửa thông tin tổ chức"
+          component={EditCompanyScreen}
         ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
