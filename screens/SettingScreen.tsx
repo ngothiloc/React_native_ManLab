@@ -7,8 +7,7 @@ import TitleHeder from "../components/TitleHeder";
 const SettingScreen = () => {
   return (
     <View style={{ paddingHorizontal: 18, backgroundColor: "#ffffff" }}>
-      <SafeAreaView>
-        <TitleHeder text="Cài đặt" />
+      <SafeAreaView style={{ marginTop: 25 }}>
         <SettingSwitch
           text="Cảnh báo chứng chỉ"
           leftIconName="bell-ring-outline"

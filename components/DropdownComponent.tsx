@@ -14,6 +14,7 @@ interface DropdownComponentProps {
   onValueChange: (value: string | number) => void;
   searchEnabled?: boolean;
   iconName?: keyof typeof MaterialCommunityIcons.glyphMap; // Prop để thay đổi icon
+  dropdownPosition?: "auto" | "top" | "bottom";
 }
 
 const DropdownComponent: React.FC<DropdownComponentProps> = ({
@@ -22,6 +23,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
   onValueChange,
   searchEnabled = true,
   iconName = "menu", // Default icon nếu không có iconName
+  dropdownPosition = "auto",
 }) => {
   const [value, setValue] = useState<DropdownItem | null>(null);
 
@@ -54,7 +56,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
       labelField="label"
       valueField="value"
       placeholder={placeholder}
-      searchPlaceholder="Search..."
+      searchPlaceholder="Tìm kiếm..."
       value={value}
       onChange={(item) => {
         setValue(item);
@@ -69,6 +71,7 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({
         />
       )}
       renderItem={renderItem}
+      dropdownPosition={dropdownPosition}
     />
   );
 };

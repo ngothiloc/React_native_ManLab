@@ -11,6 +11,9 @@ import RegisterScreen from "./screens/RegisterScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import EditPersonalScreen from "./screens/EditPersonalScreen";
 import EditCompanyScreen from "./screens/EditCompanyScreen";
+import BookingScreen from "./screens/BookingScreen";
+import AddDeviceScreen from "./screens/AddDeviceScreen";
+import InforDeviceScreen from "./screens/InforDeviceScreen";
 
 const Stack = createStackNavigator();
 export default function App() {
@@ -23,7 +26,7 @@ export default function App() {
     //   <HomeScreen />
     // </View>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Sửa thông tin cá nhân">
+      <Stack.Navigator initialRouteName="Chi tiết thiết bị">
         <Stack.Screen
           name="LoginScreens"
           component={LoginScreens}
@@ -51,6 +54,16 @@ export default function App() {
           name="Sửa thông tin tổ chức"
           component={EditCompanyScreen}
         ></Stack.Screen>
+        <Stack.Screen name="Đặt lịch" component={BookingScreen}></Stack.Screen>
+        <Stack.Screen
+          name="Thêm thiết bị mới"
+          component={AddDeviceScreen}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Chi tiết thiết bị"
+          component={InforDeviceScreen}
+        ></Stack.Screen>
+        <Stack.Screen name="Cài đặt" component={SettingScreen}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

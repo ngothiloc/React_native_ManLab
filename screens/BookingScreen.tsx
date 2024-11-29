@@ -22,15 +22,15 @@ const EditPersonalScreen = () => {
     null
   );
 
-  const dataSex = [
-    { label: "Nam", value: "Nam" },
-    { label: "Nữ", value: "Nữ" },
+  const dataDevice = [
+    { label: "Thiết bị A", value: "Thiết bị A" },
+    { label: "Thiết bị B", value: "Thiết bị B" },
   ];
 
-  const dataPosition = [
-    { label: "Giám đốc", value: "Giám đốc" },
-    { label: "Nhân viên", value: "Nhân viên" },
-    { label: "Thực tập", value: "Thực tập" },
+  const dataService = [
+    { label: "Kiểm định", value: "Kiểm định" },
+    { label: "GCN", value: "GCN" },
+    { label: "Thử nghiệm", value: "Thử nghiệm" },
   ];
 
   const handleValueChange = (value: string | number) => {
@@ -58,54 +58,52 @@ const EditPersonalScreen = () => {
         <Tieude text="Thông tin" />
 
         {/* Form nhập liệu */}
-        <Text style={styles.titleInput}>Họ và tên</Text>
-        <DienTT
-          text="Họ và tên"
-          leftIconName="account-edit-outline"
-          keyboardType="default"
-        />
-
-        <Text style={[styles.titleInput, { marginTop: 10 }]}>Email</Text>
-        <DienTT
-          text="Email"
-          leftIconName="email-outline"
-          keyboardType="email-address"
+        <Text style={styles.titleInput}>
+          Tên thiết bị <Text style={{ color: "red" }}>*</Text>
+        </Text>
+        <DropdownComponent
+          data={dataDevice}
+          placeholder="Chọn thiết bị"
+          onValueChange={handleValueChange2}
+          searchEnabled={true}
+          iconName="account-search-outline"
         />
 
         <Text style={[styles.titleInput, { marginTop: 10 }]}>
-          Số điện thoại
+          Loại dịch vụ <Text style={{ color: "red" }}>*</Text>
         </Text>
-        <DienTT
-          text="Số điện thoại"
-          leftIconName="format-list-numbered"
-          keyboardType="phone-pad"
+        <DropdownComponent
+          data={dataService}
+          placeholder="Chọn dịch vụ"
+          onValueChange={handleValueChange2}
+          searchEnabled={true}
+          iconName="account-search-outline"
         />
 
-        <Text style={[styles.titleInput, { marginTop: 10 }]}>Giới tính</Text>
+        <Text style={[styles.titleInput, { marginTop: 10 }]}>
+          Ngày tháng <Text style={{ color: "red" }}>*</Text>
+        </Text>
         <DropdownComponent
-          data={dataSex}
-          placeholder="Chọn giới tính"
+          data={dataService}
+          placeholder="dd/mm/yyyy"
           onValueChange={handleValueChange}
           searchEnabled={false}
           iconName="account-search-outline"
         />
 
-        <Text style={[styles.titleInput, { marginTop: 10 }]}>Chức vụ</Text>
-        <DropdownComponent
-          data={dataPosition}
-          placeholder="Chức vụ"
-          onValueChange={handleValueChange2}
-          searchEnabled={true}
-          iconName="account-search-outline"
-          dropdownPosition="top"
+        <Text style={[styles.titleInput, { marginTop: 10 }]}>
+          Serial <Text style={{ color: "red" }}>*</Text>
+        </Text>
+        <DienTT
+          text="Nhập serial"
+          leftIconName="format-list-numbered"
+          keyboardType="phone-pad"
         />
 
         {/* Nút cập nhật */}
         <Nut
-          text="Cập nhật"
-          onPress={() =>
-            Alert.alert("Thông báo", "Cập nhật thông tin thành công")
-          }
+          text="Đặt lịch"
+          onPress={() => Alert.alert("Thông báo", "Đặt lịch thành công")}
         />
       </View>
     </KeyboardAwareScrollView>
