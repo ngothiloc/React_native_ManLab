@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 25,
     paddingTop: 15,
-    backgroundColor: "#FCFCFC",
+    backgroundColor: "#fcfcfc",
   },
   img: {
     alignItems: "center",

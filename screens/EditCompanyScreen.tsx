@@ -35,7 +35,7 @@ const EditPersonalScreen = () => {
 
   return (
     <KeyboardAwareScrollView
-      style={{ flex: 1, backgroundColor: "#ffffff" }}
+      style={{ flex: 1, backgroundColor: "#fcfcfc" }}
       contentContainerStyle={{ flexGrow: 1, paddingTop: 15 }}
       enableOnAndroid={true}
       extraScrollHeight={100}
@@ -118,6 +118,7 @@ const EditPersonalScreen = () => {
           }
         />
       </View>
+      <View style={{ marginBottom: 50 }} />
     </KeyboardAwareScrollView>
   );
 };

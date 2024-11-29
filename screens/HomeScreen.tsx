@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { SafeAreaView, Text, View, StyleSheet } from "react-native";
 import DropdownComponent from "../components/DropdownComponent";
+import { MultiSelect } from "react-native-element-dropdown";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 const HomeScreen = () => {
-  const [selectedValue, setSelectedValue] = useState<string | number | null>(
-    null
-  );
+  const [selected, setSelected] = useState<string[]>([]);
 
   const data = [
     { label: "Item 1", value: "1" },
@@ -18,31 +18,65 @@ const HomeScreen = () => {
     { label: "Item 8", value: "8" },
   ];
 
-  const handleValueChange = (value: string | number) => {
-    setSelectedValue(value);
-  };
-
   return (
     <View style={styles.container}>
-      <DropdownComponent
+      <MultiSelect
+        style={styles.dropdown}
+        placeholderStyle={styles.placeholderStyle}
+        selectedTextStyle={styles.selectedTextStyle}
+        inputSearchStyle={styles.inputSearchStyle}
+        iconStyle={styles.iconStyle}
+        search
         data={data}
-        placeholder="Select an item"
-        onValueChange={handleValueChange}
-        searchEnabled={false}
-        iconName="account"
+        labelField="label"
+        valueField="value"
+        placeholder="Select item"
+        searchPlaceholder="Search..."
+        value={selected}
+        onChange={(item) => {
+          setSelected(item);
+        }}
+        renderLeftIcon={() => (
+          <AntDesign
+            style={styles.icon}
+            color="black"
+            name="Safety"
+            size={20}
+          />
+        )}
+        selectedStyle={styles.selectedStyle}
       />
-      <Text style={styles.selectedValue}>Selected Value: {selectedValue}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 20,
+  container: { padding: 16 },
+  dropdown: {
+    height: 50,
+    backgroundColor: "transparent",
+    borderBottomColor: "gray",
+    borderBottomWidth: 0.5,
   },
-  selectedValue: {
-    marginTop: 10,
-    fontSize: 18,
+  placeholderStyle: {
+    fontSize: 16,
+  },
+  selectedTextStyle: {
+    fontSize: 14,
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+  inputSearchStyle: {
+    height: 40,
+    fontSize: 16,
+  },
+  icon: {
+    marginRight: 5,
+  },
+  selectedStyle: {
+    borderRadius: 12,
   },
 });
 

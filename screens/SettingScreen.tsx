@@ -6,7 +6,7 @@ import TitleHeder from "../components/TitleHeder";
 
 const SettingScreen = () => {
   return (
-    <View style={{ paddingHorizontal: 18, backgroundColor: "#ffffff" }}>
+    <View style={{ paddingHorizontal: 18, backgroundColor: "#fcfcfc" }}>
       <SafeAreaView style={{ marginTop: 25 }}>
         <SettingSwitch
           text="Cảnh báo chứng chỉ"

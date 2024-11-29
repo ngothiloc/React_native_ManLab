@@ -1,7 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import LoginScreens from "./screens/LoginScreens";
 import RessetPassScreen from "./screens/RessetPassScreen";
 import SettingScreen from "./screens/SettingScreen";
@@ -18,15 +19,8 @@ import InforDeviceScreen from "./screens/InforDeviceScreen";
 const Stack = createStackNavigator();
 export default function App() {
   return (
-    // <View>
-    //   {/* <AccountSecurity /> */}
-    //   {/* <SettingScreen /> */}
-    //   {/* <RessetPassScreen /> */}
-    //   {/* <LoginScreens /> */}
-    //   <HomeScreen />
-    // </View>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Chi tiết thiết bị">
+      <Stack.Navigator initialRouteName="AccountSecurityScreen">
         <Stack.Screen
           name="LoginScreens"
           component={LoginScreens}
@@ -43,27 +37,141 @@ export default function App() {
           component={ProfileScreen}
         ></Stack.Screen>
         <Stack.Screen
-          name="Bảo mật tài khoản"
+          name="AccountSecurityScreen"
           component={AccountSecurityScreen}
-        ></Stack.Screen>
+          options={{
+            title: "Bảo mật tài khoản",
+            headerBackTitle: "",
+            headerLeftContainerStyle: {
+              paddingLeft: 10,
+            },
+            headerRightContainerStyle: {
+              paddingRight: 10,
+            },
+            headerStyle: {
+              height: 120,
+            },
+          }}
+        />
         <Stack.Screen
-          name="Sửa thông tin cá nhân"
+          name="EditPersonalScreen"
           component={EditPersonalScreen}
+          options={{
+            title: "Sửa thông tin cá nhân",
+            headerBackTitle: "",
+            headerLeftContainerStyle: {
+              paddingLeft: 10,
+            },
+            headerRightContainerStyle: {
+              paddingRight: 10,
+            },
+            headerStyle: {
+              height: 120,
+            },
+          }}
         ></Stack.Screen>
         <Stack.Screen
-          name="Sửa thông tin tổ chức"
+          name="EditCompanyScreen"
           component={EditCompanyScreen}
+          options={{
+            title: "Sửa thông tin tổ chức",
+            headerBackTitle: "",
+            headerLeftContainerStyle: {
+              paddingLeft: 10,
+            },
+            headerRightContainerStyle: {
+              paddingRight: 10,
+            },
+            headerStyle: {
+              height: 120,
+            },
+          }}
         ></Stack.Screen>
-        <Stack.Screen name="Đặt lịch" component={BookingScreen}></Stack.Screen>
         <Stack.Screen
-          name="Thêm thiết bị mới"
+          name="BookingScreen"
+          component={BookingScreen}
+          options={{
+            title: "Đặt lịch",
+            headerBackTitle: "",
+            headerLeftContainerStyle: {
+              paddingLeft: 10,
+            },
+            headerRightContainerStyle: {
+              paddingRight: 10,
+            },
+            headerStyle: {
+              height: 120,
+            },
+          }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="AddDeviceScreen"
           component={AddDeviceScreen}
+          options={{
+            title: "Thêm thiết bị mới",
+            headerBackTitle: "",
+            headerLeftContainerStyle: {
+              paddingLeft: 10,
+            },
+            headerRightContainerStyle: {
+              paddingRight: 10,
+            },
+            headerStyle: {
+              height: 120,
+            },
+          }}
         ></Stack.Screen>
         <Stack.Screen
-          name="Chi tiết thiết bị"
+          name="InforDeviceScreen"
           component={InforDeviceScreen}
+          options={{
+            title: "Chi tiết thiết bị",
+            headerBackTitle: "",
+            headerLeftContainerStyle: {
+              paddingLeft: 10,
+            },
+            headerRightContainerStyle: {
+              paddingRight: 10,
+            },
+            headerStyle: {
+              height: 120,
+            },
+          }}
         ></Stack.Screen>
-        <Stack.Screen name="Cài đặt" component={SettingScreen}></Stack.Screen>
+        <Stack.Screen
+          name="SettingScreen"
+          component={SettingScreen}
+          options={{
+            title: "Cài đặt",
+            headerBackTitle: "",
+            headerLeftContainerStyle: {
+              paddingLeft: 10,
+            },
+            headerRightContainerStyle: {
+              paddingRight: 10,
+            },
+            headerStyle: {
+              height: 120,
+            },
+          }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="RessetPassScreen"
+          component={RessetPassScreen}
+          options={{
+            title: "Đổi mật khẩu",
+            headerBackTitle: "",
+            headerLeftContainerStyle: {
+              paddingLeft: 10,
+            },
+            headerRightContainerStyle: {
+              paddingRight: 10,
+            },
+            headerStyle: {
+              height: 120,
+            },
+          }}
+        ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

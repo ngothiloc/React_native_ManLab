@@ -7,7 +7,9 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
+  KeyboardAvoidingView,
 } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import TitleHeder from "../components/TitleHeder";
 import DienMK from "../components/DienMK";
 import Nut from "../components/Nut";
@@ -46,50 +48,51 @@ const RessetPassScreen = () => {
     Alert.alert("Thông báo", "Đổi mật khẩu thành công");
   };
   return (
-    <View style={{ paddingHorizontal: 18 }}>
-      <SafeAreaView>
-        <TitleHeder text="Đổi mật khẩu" />
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View>
-            <View style={{ marginBottom: 18 }}>
-              <Text style={styles.describe}>
-                Mật khẩu yêu cầu có 6 ký tự trở lên, có ít nhất một chữ và một
-                số. Không nhập tiếng việt có dấu
-              </Text>
-            </View>
-            <DienMK
-              text="Mật khẩu hiện tại"
-              leftIconName="shield-key-outline"
-            />
-            <DienMK
-              text="Tạo mật khẩu mới"
-              leftIconName="key-chain-variant"
-              keyboardType="visible-password"
-              onChangeText={(value) => setPassWord(value)}
-              isError={isSubmitted && checkPass}
-            />
-            <DienMK
-              text="Nhập lại mật khẩu"
-              leftIconName="key-chain-variant"
-              keyboardType="visible-password"
-              onChangeText={(value) => setPassVerify(value)}
-              isError={isSubmitted && checkPassVerify}
-            />
-            <Nut text="Đóng" onPress={handlePress} />
-            <View style={{ margin: 100 }}></View>
-          </View>
-        </TouchableWithoutFeedback>
-      </SafeAreaView>
-    </View>
+    <KeyboardAwareScrollView
+      style={{ flex: 1, backgroundColor: "#fcfcfc" }}
+      contentContainerStyle={{ flexGrow: 1, paddingTop: 15 }}
+      enableOnAndroid={true}
+      extraScrollHeight={100}
+      keyboardShouldPersistTaps="handled"
+    >
+      <View style={{ paddingHorizontal: 25 }}>
+        <View style={{ marginBottom: 18 }}>
+          <Text style={styles.describe}>
+            Mật khẩu yêu cầu có 6 ký tự trở lên, có ít nhất một chữ và một số.
+            Không nhập tiếng việt có dấu
+          </Text>
+        </View>
+        <DienMK text="Mật khẩu hiện tại" leftIconName="shield-key-outline" />
+        <View style={styles.gap} />
+        <DienMK
+          text="Tạo mật khẩu mới"
+          leftIconName="key-chain-variant"
+          keyboardType="visible-password"
+          onChangeText={(value) => setPassWord(value)}
+          isError={isSubmitted && checkPass}
+        />
+        <View style={styles.gap} />
+        <DienMK
+          text="Nhập lại mật khẩu"
+          leftIconName="key-chain-variant"
+          keyboardType="visible-password"
+          onChangeText={(value) => setPassVerify(value)}
+          isError={isSubmitted && checkPassVerify}
+        />
+        <Nut text="Đóng" onPress={handlePress} />
+      </View>
+    </KeyboardAwareScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  content: {},
   describe: {
     fontSize: 14,
     fontWeight: "400",
     textAlign: "center",
+  },
+  gap: {
+    marginBottom: 10,
   },
 });
 
