@@ -1,25 +1,16 @@
 import React from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView, Alert } from "react-native";
 import InfoRow from "../components/InfoRow";
 import ChoseAvatar from "../components/ChoseAvatar";
 import Tieude from "../components/Tieude";
+import Nut from "../components/Nut";
 const InforDeviceScreen = () => {
   const dataInfo = [
     { title: "Tên thiết bị", value: "Tên thiết bị" },
     { title: "Cơ sở sản xuất", value: "Cơ sở sản xuất" },
     { title: "Model", value: "Model" },
     { title: "Serial", value: "Serial" },
-    // { title: "Thông tin 5", status: "hết hiệu lực" }, // Phần tử này có status "huỷ bỏ"
-  ];
-  const dataCheck = [
-    { title: "Yêu cầu thực hiện", value: "Kiểm định" },
-    { title: "Tình trạng nhận PTĐ", value: "Bình thường" },
-    { title: "Tình trạng trả PTĐ", value: "Bình thường" },
-    { title: "Tình trạng BBĐL", value: "Chưa trả" },
-    { title: "Số GCN", value: "abc123" },
-    { title: "Số tem ", value: "abc123" },
-    { title: "Ngày dự kiến ", value: "28/11/2024" },
-    { title: "Trạng thái ", status: "hiệu lực" },
+    { title: "Trạng thái ", status: "hết hiệu lực" },
   ];
 
   return (
@@ -29,8 +20,10 @@ const InforDeviceScreen = () => {
       </View>
       <Tieude text="Thông tin chi tiết" />
       <InfoRow data={dataInfo} />
-      <Tieude text="Lịch sử kiểm định" />
-      <InfoRow data={dataCheck} />
+      <Nut
+        text="Đóng"
+        onPress={() => Alert.alert("Thông báo", "Chuyển trang")}
+      />
       <View style={{ marginBottom: 50 }} />
     </ScrollView>
   );

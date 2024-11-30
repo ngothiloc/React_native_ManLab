@@ -12,7 +12,7 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-//import screens
+// Import screens
 import LoginScreens from "./screens/LoginScreens";
 import RessetPassScreen from "./screens/RessetPassScreen";
 import SettingScreen from "./screens/SettingScreen";
@@ -24,21 +24,40 @@ import EditPersonalScreen from "./screens/EditPersonalScreen";
 import EditCompanyScreen from "./screens/EditCompanyScreen";
 import BookingScreen from "./screens/BookingScreen";
 import AddDeviceScreen from "./screens/AddDeviceScreen";
-import InforDeviceScreen from "./screens/InforDeviceScreen";
 import PTDScreen from "./screens/PTDScreen";
 import FeedbackScreen from "./screens/FeedbackScreen";
+import InfoDevicePTDScreen from "./screens/InfoDevicePTDScreen";
+import InfoDeviceScreen from "./screens/InfoDeviceScreen";
 
 const Stack = createStackNavigator();
 const MenuBar = createBottomTabNavigator();
 
 function TabNavigator() {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [scaleAnim] = useState(new Animated.Value(1));
+
+  const handleCenterButtonPress = () => {
+    Animated.sequence([
+      Animated.timing(scaleAnim, {
+        toValue: 1.2,
+        duration: 150,
+        useNativeDriver: true,
+      }),
+      Animated.timing(scaleAnim, {
+        toValue: 1,
+        duration: 150,
+        useNativeDriver: true,
+      }),
+    ]).start();
+
+    // Hành động khi nhấn vào nút giữa
+    alert("Đã nhấn vào nút giữ!");
+  };
 
   return (
     <MenuBar.Navigator
       initialRouteName="HomeScreen"
       screenOptions={{
-        tabBarActiveTintColor: "#e91e63",
+        tabBarActiveTintColor: "#308BFF",
         tabBarInactiveTintColor: "gray",
       }}
     >
@@ -62,7 +81,7 @@ function TabNavigator() {
             <MaterialCommunityIcons name="gauge" color={color} size={size} />
           ),
         }}
-      ></MenuBar.Screen>
+      />
 
       <MenuBar.Screen
         name="CenterButton"
@@ -70,13 +89,13 @@ function TabNavigator() {
         options={{
           tabBarButton: (props) => (
             <TouchableOpacity
-              {...props}
+              onPress={handleCenterButtonPress}
               style={{
                 position: "absolute",
-                top: -20, // Điều chỉnh vị trí của nút ở giữa
+                top: -20,
                 left: "50%",
                 transform: [{ translateX: -25 }],
-                backgroundColor: "#e91e63",
+                backgroundColor: "#308BFF",
                 borderRadius: 50,
                 padding: 15,
                 shadowColor: "#000",
@@ -85,16 +104,14 @@ function TabNavigator() {
                 shadowRadius: 4,
                 elevation: 5,
               }}
-              onPress={() => {
-                // Hành động khi nhấn vào nút hình vuông
-                alert("Đã nhấn vào nút giữa!");
-              }}
             >
-              <MaterialCommunityIcons
-                name="qrcode-scan"
-                color="white"
-                size={30}
-              />
+              <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+                <MaterialCommunityIcons
+                  name="qrcode-scan"
+                  color="white"
+                  size={30}
+                />
+              </Animated.View>
             </TouchableOpacity>
           ),
         }}
@@ -113,7 +130,7 @@ function TabNavigator() {
             />
           ),
         }}
-      ></MenuBar.Screen>
+      />
       <MenuBar.Screen
         name="ProfileScreen"
         component={ProfileScreen}
@@ -127,11 +144,10 @@ function TabNavigator() {
     </MenuBar.Navigator>
   );
 }
-
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="MainScreen">
+      <Stack.Navigator initialRouteName="InfoDevicePTDScreen">
         <Stack.Screen
           name="LoginScreens"
           component={LoginScreens}
@@ -153,7 +169,7 @@ export default function App() {
               paddingLeft: 10,
             },
             headerRightContainerStyle: {
-              paddingRight: 10,
+              paddingRight: 20,
             },
             headerStyle: {
               height: 120,
@@ -170,7 +186,7 @@ export default function App() {
               paddingLeft: 10,
             },
             headerRightContainerStyle: {
-              paddingRight: 10,
+              paddingRight: 20,
             },
             headerStyle: {
               height: 120,
@@ -187,7 +203,7 @@ export default function App() {
               paddingLeft: 10,
             },
             headerRightContainerStyle: {
-              paddingRight: 10,
+              paddingRight: 20,
             },
             headerStyle: {
               height: 120,
@@ -204,7 +220,7 @@ export default function App() {
               paddingLeft: 10,
             },
             headerRightContainerStyle: {
-              paddingRight: 10,
+              paddingRight: 20,
             },
             headerStyle: {
               height: 120,
@@ -221,7 +237,7 @@ export default function App() {
               paddingLeft: 10,
             },
             headerRightContainerStyle: {
-              paddingRight: 10,
+              paddingRight: 20,
             },
             headerStyle: {
               height: 120,
@@ -229,8 +245,8 @@ export default function App() {
           }}
         ></Stack.Screen>
         <Stack.Screen
-          name="InforDeviceScreen"
-          component={InforDeviceScreen}
+          name="InfoDeviceScreen"
+          component={InfoDeviceScreen}
           options={{
             title: "Chi tiết thiết bị",
             headerBackTitle: "",
@@ -238,11 +254,58 @@ export default function App() {
               paddingLeft: 10,
             },
             headerRightContainerStyle: {
-              paddingRight: 10,
+              paddingRight: 20,
             },
             headerStyle: {
               height: 120,
             },
+            headerRight: () => (
+              <TouchableOpacity onPress={() => alert("Đã bấm vào icon!")}>
+                <MaterialCommunityIcons
+                  name="qrcode"
+                  size={25}
+                  color="#656565"
+                />
+              </TouchableOpacity>
+            ),
+          }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="InfoDevicePTDScreen"
+          component={InfoDevicePTDScreen}
+          options={{
+            title: "Chi tiết thiết bị",
+            headerBackTitle: "",
+            headerLeftContainerStyle: {
+              paddingLeft: 10,
+            },
+            headerRightContainerStyle: {
+              paddingRight: 20,
+            },
+            headerStyle: {
+              height: 120,
+            },
+            headerRight: () => (
+              <View style={{ flexDirection: "row", rowGap: 30 }}>
+                <TouchableOpacity
+                  onPress={() => alert("Đã bấm vào icon!")}
+                  style={{ marginRight: 10 }}
+                >
+                  <MaterialCommunityIcons
+                    name="qrcode"
+                    size={25}
+                    color="#656565"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => alert("Đã bấm vào icon 2!")}>
+                  <MaterialCommunityIcons
+                    name="cloud-download"
+                    size={25}
+                    color="#656565"
+                  />
+                </TouchableOpacity>
+              </View>
+            ),
           }}
         ></Stack.Screen>
         <Stack.Screen
@@ -255,7 +318,7 @@ export default function App() {
               paddingLeft: 10,
             },
             headerRightContainerStyle: {
-              paddingRight: 10,
+              paddingRight: 20,
             },
             headerStyle: {
               height: 120,
@@ -272,7 +335,7 @@ export default function App() {
               paddingLeft: 10,
             },
             headerRightContainerStyle: {
-              paddingRight: 10,
+              paddingRight: 20,
             },
             headerStyle: {
               height: 120,
