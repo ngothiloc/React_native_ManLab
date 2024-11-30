@@ -76,7 +76,7 @@ function TabNavigator() {
         name="PTDScreen"
         component={PTDScreen}
         options={{
-          tabBarLabel: "PTD",
+          title: "Phương tiện đo",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="gauge" color={color} size={size} />
           ),
@@ -121,13 +121,29 @@ function TabNavigator() {
         name="FeedbackScreen"
         component={FeedbackScreen}
         options={{
-          tabBarLabel: "Phản hồi",
+          title: "Phản hồi",
+          headerStyle: {
+            borderBottomWidth: 0,
+            elevation: 0, // Remove shadow on Android
+            shadowOpacity: 0, // Remove shadow on iOS
+            borderBottomColor: "transparent",
+          },
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="comment-text"
               color={color}
               size={size}
             />
+          ),
+          headerRight: () => (
+            <TouchableOpacity onPress={() => alert("Đã bấm vào icon!")}>
+              <MaterialCommunityIcons
+                name="plus-circle-outline"
+                size={25}
+                color="#656565"
+                style={{ marginRight: 20 }}
+              />
+            </TouchableOpacity>
           ),
         }}
       />
@@ -147,7 +163,7 @@ function TabNavigator() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="InfoDevicePTDScreen">
+      <Stack.Navigator initialRouteName="MainScreen">
         <Stack.Screen
           name="LoginScreens"
           component={LoginScreens}
