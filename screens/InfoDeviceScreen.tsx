@@ -10,7 +10,7 @@ const InforDeviceScreen = () => {
     { title: "Cơ sở sản xuất", value: "Cơ sở sản xuất" },
     { title: "Model", value: "Model" },
     { title: "Serial", value: "Serial" },
-    { title: "Trạng thái ", status: "hết hiệu lực" },
+    { title: "Trạng thái ", status: "hết hiệu lực" as const },
   ];
 
   return (

@@ -1,27 +1,12 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
+// Import screens
+import AllFeedbackScreen from ".//AllFeedbackScreen";
+import PendingFeedbackScreen from ".//PendingFeedbackScreen";
+import CompletedFeedbackScreen from ".//CompletedFeedbackScreen";
+
 const Tab = createMaterialTopTabNavigator();
-
-// Create components for each tab
-const AllFeedbackScreen = () => (
-  <View style={styles.tabContent}>
-    <Text>Đã gửi</Text>
-  </View>
-);
-
-const PendingFeedbackScreen = () => (
-  <View style={styles.tabContent}>
-    <Text>Đang xử lý</Text>
-  </View>
-);
-
-const CompletedFeedbackScreen = () => (
-  <View style={styles.tabContent}>
-    <Text>Đã hoàn thành</Text>
-  </View>
-);
 
 const FeedbackScreen = () => {
   return (
@@ -33,23 +18,10 @@ const FeedbackScreen = () => {
         tabBarInactiveTintColor: "#657786",
         tabBarLabelStyle: styles.tabLabel,
       }}
-      initialRouteName="AllFeedback"
     >
-      <Tab.Screen
-        name="AllFeedback"
-        component={AllFeedbackScreen}
-        options={{ tabBarLabel: "Đã gửi" }}
-      />
-      <Tab.Screen
-        name="PendingFeedback"
-        component={PendingFeedbackScreen}
-        options={{ tabBarLabel: "Đang xử lý" }}
-      />
-      <Tab.Screen
-        name="CompletedFeedback"
-        component={CompletedFeedbackScreen}
-        options={{ tabBarLabel: "Đã hoàn thành" }}
-      />
+      <Tab.Screen name="Đã gửi" component={AllFeedbackScreen} />
+      <Tab.Screen name="Đang xử lý" component={PendingFeedbackScreen} />
+      <Tab.Screen name="Đã hoàn thành" component={CompletedFeedbackScreen} />
     </Tab.Navigator>
   );
 };
@@ -67,16 +39,9 @@ const styles = StyleSheet.create({
     height: 3,
   },
   tabLabel: {
-    textTransform: "none", // Prevents automatic capitalization
+    textTransform: "none",
     fontWeight: "600",
     fontSize: 14,
   },
-  tabContent: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fcfcfc",
-  },
 });
-
 export default FeedbackScreen;

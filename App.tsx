@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 // Import screens
 import LoginScreens from "./screens/LoginScreens";
@@ -25,9 +26,9 @@ import EditCompanyScreen from "./screens/EditCompanyScreen";
 import BookingScreen from "./screens/BookingScreen";
 import AddDeviceScreen from "./screens/AddDeviceScreen";
 import PTDScreen from "./screens/PTDScreen";
-import FeedbackScreen from "./screens/FeedbackScreen";
 import InfoDevicePTDScreen from "./screens/InfoDevicePTDScreen";
 import InfoDeviceScreen from "./screens/InfoDeviceScreen";
+import FeedbackScreen from "./screens/FeedbackScreen";
 
 const Stack = createStackNavigator();
 const MenuBar = createBottomTabNavigator();
@@ -55,7 +56,7 @@ function TabNavigator() {
 
   return (
     <MenuBar.Navigator
-      initialRouteName="HomeScreen"
+      initialRouteName="FeedbackScreen"
       screenOptions={{
         tabBarActiveTintColor: "#308BFF",
         tabBarInactiveTintColor: "gray",
