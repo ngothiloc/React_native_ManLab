@@ -7,23 +7,35 @@ import Tieude from "../components/Tieude";
 import DienTT from "../components/DienTT";
 import DropdownComponent from "../components/DropdownComponent";
 
-const EditPersonalScreen = () => {
+const EditCompanyScreen = () => {
   const [selectedValue, setSelectedValue] = useState<string | number | null>(
     null
   );
   const [selectedValue2, setSelectedValue2] = useState<string | number | null>(
     null
   );
+  const [selectedValue3, setSelectedValue3] = useState<string | number | null>(
+    null
+  );
 
-  const dataSex = [
-    { label: "Nam", value: "Nam" },
-    { label: "Nữ", value: "Nữ" },
+  const dataCity = [
+    { label: "Thành phố Hà Nội", value: "Hà Nội" },
+    { label: "Thành phố Hồ Chí Minh", value: "Hồ Chí Minh" },
+    { label: "Thành phố Đà Nẵng", value: "Đà Nẵng" },
+    { label: "Thành phố Hải Phòng", value: "Hải Phòng" },
   ];
 
-  const dataPosition = [
-    { label: "Giám đốc", value: "Giám đốc" },
-    { label: "Nhân viên", value: "Nhân viên" },
-    { label: "Thực tập", value: "Thực tập" },
+  const dataDistrict = [
+    { label: "Quận Ba Đình", value: "Ba Đình" },
+    { label: "Quận Cầu Giấy", value: "Cầu Giấy" },
+    { label: "Quận Đống Đa", value: "Đống Đa" },
+    { label: "Quận Hà Đông", value: "Hà Đông" },
+  ];
+
+  const dataWard = [
+    { label: "Phường Mỹ Đình", value: "Mỹ Đình" },
+    { label: "Phường Cầu Diễn", value: "Cầu Diễn" },
+    { label: "Phường Thanh Xuân Trung", value: "Thanh Xuân Trung" },
   ];
 
   const handleValueChange = (value: string | number) => {
@@ -31,6 +43,9 @@ const EditPersonalScreen = () => {
   };
   const handleValueChange2 = (value: string | number) => {
     setSelectedValue2(value);
+  };
+  const handleValueChange3 = (value: string | number) => {
+    setSelectedValue3(value);
   };
 
   return (
@@ -76,16 +91,16 @@ const EditPersonalScreen = () => {
         <Tieude text="Địa chỉ" />
         <Text style={styles.titleInput}>Tỉnh / Thành phố</Text>
         <DropdownComponent
-          data={dataSex}
+          data={dataCity}
           placeholder="Tỉnh / Thành phố"
           onValueChange={handleValueChange}
-          searchEnabled={false}
+          searchEnabled={true}
           iconName="account-search-outline"
         />
 
         <Text style={[styles.titleInput, { marginTop: 10 }]}>Quận / Huyện</Text>
         <DropdownComponent
-          data={dataPosition}
+          data={dataDistrict}
           placeholder="Quận / Huyện"
           onValueChange={handleValueChange2}
           searchEnabled={true}
@@ -94,9 +109,9 @@ const EditPersonalScreen = () => {
 
         <Text style={[styles.titleInput, { marginTop: 10 }]}>Phường / Xã</Text>
         <DropdownComponent
-          data={dataPosition}
+          data={dataWard}
           placeholder="Phường / Xã"
-          onValueChange={handleValueChange2}
+          onValueChange={handleValueChange3}
           searchEnabled={true}
           iconName="account-search-outline"
         />
@@ -134,4 +149,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EditPersonalScreen;
+export default EditCompanyScreen;

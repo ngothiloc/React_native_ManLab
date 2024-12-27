@@ -18,10 +18,10 @@ const FeedBackComponent = () => {
       </View>
       <View>
         <MaterialCommunityIcons
-          name="keyboard-backspace"
+          name="arrow-right"
           size={25}
           color="#303030"
-          style={{ transform: [{ scaleX: -1 }] }}
+          // style={{ transform: [{ scaleX: -1 }] }}
         />
       </View>
     </TouchableOpacity>
@@ -34,11 +34,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderWidth: 1,
     borderColor: "#B4DBFF",
-    borderRadius: 10,
+    borderRadius: 20,
     padding: 10,
+    paddingRight: 20,
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
+    height: 84,
   },
   content: {
     flexDirection: "row",

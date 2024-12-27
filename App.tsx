@@ -8,10 +8,10 @@ import {
   View,
   TouchableOpacity,
   Animated,
+  SafeAreaView,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 // Import screens
 import LoginScreens from "./screens/LoginScreens";
@@ -56,10 +56,13 @@ function TabNavigator() {
 
   return (
     <MenuBar.Navigator
-      initialRouteName="FeedbackScreen"
+      initialRouteName="ProfileScreen"
       screenOptions={{
         tabBarActiveTintColor: "#308BFF",
         tabBarInactiveTintColor: "gray",
+        tabBarStyle: {
+          backgroundColor: "white",
+        },
       }}
     >
       <MenuBar.Screen
@@ -123,11 +126,14 @@ function TabNavigator() {
         component={FeedbackScreen}
         options={{
           title: "Phản hồi",
+          headerTitleAlign: "center",
           headerStyle: {
             borderBottomWidth: 0,
             elevation: 0, // Remove shadow on Android
             shadowOpacity: 0, // Remove shadow on iOS
             borderBottomColor: "transparent",
+            alignItems: "center",
+            justifyContent: "center",
           },
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons

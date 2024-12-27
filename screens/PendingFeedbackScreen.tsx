@@ -1,18 +1,22 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import FeedBackComponent from "../components/FeedBackComponent";
 
 const FeedbackScreen: React.FC = () => (
   <View style={styles.tabContent}>
-    <Text>mh2</Text>
+    <FeedBackComponent />
+    <FeedBackComponent />
+    <FeedBackComponent />
   </View>
 );
 
 const styles = StyleSheet.create({
   tabContent: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "#fcfcfc",
+    paddingHorizontal: 18,
+    paddingTop: 20,
+    gap: 20,
   },
 });
 
