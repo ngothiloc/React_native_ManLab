@@ -1,31 +1,82 @@
-import {
-  View,
-  Text,
-  Dimensions,
-  StyleSheet,
-  ScrollViewComponent,
-  ScrollView,
-} from "react-native";
+import { View, Text, Dimensions, StyleSheet, FlatList } from "react-native";
 import React from "react";
 import Sort from "../components/Sort";
 import Filter from "../components/Filter";
 import CardExecutionHistory from "../components/CardExecutionHistory";
 
 const ExecutionHistory = () => {
+  const devices = [
+    {
+      id: "1",
+      name: "Thiết bị 1",
+      status: "hiệu lực",
+      qrCodeLink:
+        "https://via.assets.so/album.png?id=1&q=95&w=360&h=360&fit=fill",
+    },
+    {
+      id: "2",
+      name: "Thiết bị 2",
+      status: "hết hiệu lực",
+      qrCodeLink:
+        "https://via.assets.so/album.png?id=1&q=95&w=360&h=360&fit=fill",
+    },
+    {
+      id: "3",
+      name: "Thiết bị 3",
+      status: "sắp hết hiệu lực",
+      qrCodeLink:
+        "https://via.assets.so/album.png?id=1&q=95&w=360&h=360&fit=fill",
+    },
+    {
+      id: "4",
+      name: "Thiết bị 4",
+      status: "huỷ bỏ",
+      qrCodeLink:
+        "https://via.assets.so/album.png?id=1&q=95&w=360&h=360&fit=fill",
+    },
+    {
+      id: "5",
+      name: "Thiết bị 5",
+      status: "chờ cấp mới",
+      qrCodeLink:
+        "https://via.assets.so/album.png?id=1&q=95&w=360&h=360&fit=fill",
+    },
+  ];
+
+  // Xác định số cột dựa trên chiều rộng
+  const screenWidth = Dimensions.get("screen").width;
+  const numColumns = screenWidth < 700 ? 2 : 4;
+
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.sort}>
         <Sort />
         <Filter />
       </View>
-      <View style={styles.card}>
-        <CardExecutionHistory />
-        <CardExecutionHistory />
-        <CardExecutionHistory />
-        <CardExecutionHistory />
-        <CardExecutionHistory />
-      </View>
-    </ScrollView>
+      <FlatList
+        data={devices}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <CardExecutionHistory
+            name={item.name}
+            status={
+              item.status as
+                | "huỷ bỏ"
+                | "chờ cấp mới"
+                | "hiệu lực"
+                | "hết hiệu lực"
+                | "sắp hết hiệu lực"
+            }
+            qrCodeLink={item.qrCodeLink}
+          />
+        )}
+        contentContainerStyle={styles.card}
+        numColumns={numColumns} // Số cột động
+        columnWrapperStyle={{
+          justifyContent: "space-between",
+        }}
+      />
+    </View>
   );
 };
 
@@ -33,7 +84,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fcfcfc",
     paddingTop: 15,
-    // paddingHorizontal: 30,
   },
   sort: {
     flexDirection: "row",
@@ -41,12 +91,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
   card: {
-    backgroundColor: "white",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "flex-start",
     paddingHorizontal: 13,
-    marginVertical: 15,
+    paddingBottom: 15,
   },
 });
 

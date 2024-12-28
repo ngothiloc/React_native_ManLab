@@ -1,13 +1,13 @@
+import React, { useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   Image,
   TouchableOpacity,
-  Alert,
   Dimensions,
+  Modal,
 } from "react-native";
-import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -21,8 +21,25 @@ type RootStackParamList = {
   InfoDeviceScreen: undefined;
 };
 
-const CardExecutionHistory = () => {
+type CardExecutionHistoryProps = {
+  name: string;
+  status:
+    | "hiệu lực"
+    | "hết hiệu lực"
+    | "huỷ bỏ"
+    | "chờ cấp mới"
+    | "sắp hết hiệu lực";
+  qrCodeLink: string; // Link hình ảnh mã QR
+};
+
+const CardExecutionHistory: React.FC<CardExecutionHistoryProps> = ({
+  name,
+  status,
+  qrCodeLink,
+}) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const [modalVisible, setModalVisible] = useState(false); // State để hiển thị modal
+
   return (
     <View style={styles.container}>
       <Image source={require("../assets/qr-code.png")} style={styles.qrcode} />
@@ -33,13 +50,13 @@ const CardExecutionHistory = () => {
             fillRule="evenodd"
             clipRule="evenodd"
             d="M128.149 4.95589C124.502 1.76117 119.819 0 114.971 0H20C8.9543 0 0 8.95431 0 20V126C0 137.046 8.9543 146 20 146H138C149.046 146 158 137.046 158 126V40.1736C158 34.4103 155.514 28.9271 151.179 25.1295L128.149 4.95589Z"
-            fill="white" // Bạn có thể thay đổi màu sắc tại đây
+            fill="white"
           />
         </Svg>
       </View>
       <View style={styles.content}>
         <Text style={{ alignItems: "center", justifyContent: "center" }}>
-          Name Device
+          {name}
         </Text>
       </View>
       <TouchableOpacity onPress={() => navigation.navigate("InfoDeviceScreen")}>
@@ -54,20 +71,53 @@ const CardExecutionHistory = () => {
             />
           </View>
           <View style={styles.status}>
-            <Status status="hiệu lực" />
-
+            <Status status={status} />
             <MaterialCommunityIcons name="arrow-right" color="gray" size={25} />
           </View>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => Alert.alert("Thông báo", "Mã QR hiện lên")}
-      >
-        <View style={styles.touch}>{/* <Text>alo</Text> */}</View>
+
+      {/* Thay đổi TouchableOpacity để mở modal */}
+      <TouchableOpacity onPress={() => setModalVisible(true)}>
+        <View style={styles.touch}></View>
       </TouchableOpacity>
+
+      {/* Modal hiển thị hình ảnh QR Code */}
+      <Modal
+        visible={modalVisible}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Image
+            source={{ uri: qrCodeLink }}
+            style={{ width: 200, height: 200 }}
+          />
+          <TouchableOpacity
+            style={{
+              marginTop: 20,
+              padding: 10,
+              backgroundColor: "white",
+              borderRadius: 10,
+            }}
+            onPress={() => setModalVisible(false)}
+          >
+            <Text style={{ color: "black" }}>Đóng</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
@@ -76,7 +126,6 @@ const styles = StyleSheet.create({
     padding: 15,
     borderColor: "#B4DBFF",
     margin: width < 700 ? 3 : 10,
-    //shadow
     shadowColor: "#B4DBFF",
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.4,
@@ -91,11 +140,9 @@ const styles = StyleSheet.create({
   },
   card: {
     borderTopRightRadius: 100,
-    // marginTop: -10,
   },
   content: {
     position: "absolute",
-    // backgroundColor: "yellow",
     top: 15,
     left: 15,
     gap: 10,
@@ -103,13 +150,10 @@ const styles = StyleSheet.create({
   },
   content2: {
     position: "absolute",
-    // backgroundColor: "yellow",
     top: -120,
     left: 1,
     gap: 15,
     width: 145,
-    // alignItems: "center",
-    // justifyContent: "center",
   },
   status: {
     flexDirection: "row",
@@ -117,7 +161,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   touch: {
-    // backgroundColor: "red",
     padding: 20,
     position: "absolute",
     zIndex: 1000,
@@ -125,4 +168,5 @@ const styles = StyleSheet.create({
     top: -150,
   },
 });
+
 export default CardExecutionHistory;
