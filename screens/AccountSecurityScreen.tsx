@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import SettingNext from "../components/SettingNext";
 import SettingSwitch from "../components/SettingSwitch";
+import { StatusBar } from "expo-status-bar";
 
 type RootStackParamList = {
   RessetPassScreen: undefined;
@@ -14,6 +15,7 @@ const AccountSecurity: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar style="dark" />
       <View style={styles.content}>
         <SettingNext
           text="Đổi mật khẩu"

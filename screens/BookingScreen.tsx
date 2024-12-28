@@ -13,6 +13,7 @@ import Nut from "../components/Nut";
 import Tieude from "../components/Tieude";
 import DienTT from "../components/DienTT";
 import DropdownComponent from "../components/DropdownComponent";
+import { StatusBar } from "expo-status-bar";
 
 const EditPersonalScreen = () => {
   const [selectedValue, setSelectedValue] = useState<string | number | null>(
@@ -48,6 +49,7 @@ const EditPersonalScreen = () => {
       extraScrollHeight={100}
       keyboardShouldPersistTaps="handled"
     >
+      <StatusBar style="dark" />
       <View style={{ paddingHorizontal: 25 }}>
         {/* Avatar */}
         <View style={styles.container}>

@@ -29,6 +29,7 @@ import PTDScreen from "./screens/PTDScreen";
 import InfoDevicePTDScreen from "./screens/InfoDevicePTDScreen";
 import InfoDeviceScreen from "./screens/InfoDeviceScreen";
 import FeedbackScreen from "./screens/FeedbackScreen";
+import ExecutionHistory from "./screens/ExecutionHistory";
 
 const Stack = createStackNavigator();
 const MenuBar = createBottomTabNavigator();
@@ -73,6 +74,7 @@ function TabNavigator() {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
+          headerShown: false,
         }}
       />
 
@@ -80,7 +82,7 @@ function TabNavigator() {
         name="PTDScreen"
         component={PTDScreen}
         options={{
-          title: "Phương tiện đo",
+          title: "PTD",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="gauge" color={color} size={size} />
           ),
@@ -158,10 +160,11 @@ function TabNavigator() {
         name="ProfileScreen"
         component={ProfileScreen}
         options={{
-          tabBarLabel: "Profile",
+          tabBarLabel: "Hồ sơ",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account" color={color} size={size} />
           ),
+          headerShown: false,
         }}
       />
     </MenuBar.Navigator>
@@ -353,6 +356,23 @@ export default function App() {
           component={RessetPassScreen}
           options={{
             title: "Đổi mật khẩu",
+            headerBackTitle: "",
+            headerLeftContainerStyle: {
+              paddingLeft: 10,
+            },
+            headerRightContainerStyle: {
+              paddingRight: 20,
+            },
+            headerStyle: {
+              height: 120,
+            },
+          }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="ExecutionHistory"
+          component={ExecutionHistory}
+          options={{
+            title: "Lịch sử thực hiện",
             headerBackTitle: "",
             headerLeftContainerStyle: {
               paddingLeft: 10,

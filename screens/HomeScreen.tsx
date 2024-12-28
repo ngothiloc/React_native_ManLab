@@ -1,83 +1,164 @@
-import React, { useState } from "react";
-import { SafeAreaView, Text, View, StyleSheet } from "react-native";
-import DropdownComponent from "../components/DropdownComponent";
-import { MultiSelect } from "react-native-element-dropdown";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import React from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  Dimensions,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import SearchBar from "../components/SearchBar";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
+const { height, width } = Dimensions.get("window");
 
-const HomeScreen = () => {
-  const [selected, setSelected] = useState<string[]>([]);
-
-  const data = [
-    { label: "Item 1", value: "1" },
-    { label: "Item 2", value: "2" },
-    { label: "Item 3", value: "3" },
-    { label: "Item 4", value: "4" },
-    { label: "Item 5", value: "5" },
-    { label: "Item 6", value: "6" },
-    { label: "Item 7", value: "7" },
-    { label: "Item 8", value: "8" },
-  ];
-
+type RootStackParamList = {
+  ProfileScreen: undefined;
+  AccountSecurityScreen: undefined;
+  ExecutionHistory: undefined;
+  EditCompanyScreen: undefined;
+  EditPersonalScreen: undefined;
+  SettingScreen: undefined;
+};
+const ProfileScreen = () => {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   return (
-    <View style={styles.container}>
-      <MultiSelect
-        style={styles.dropdown}
-        placeholderStyle={styles.placeholderStyle}
-        selectedTextStyle={styles.selectedTextStyle}
-        inputSearchStyle={styles.inputSearchStyle}
-        iconStyle={styles.iconStyle}
-        search
-        data={data}
-        labelField="label"
-        valueField="value"
-        placeholder="Select item"
-        searchPlaceholder="Search..."
-        value={selected}
-        onChange={(item) => {
-          setSelected(item);
-        }}
-        renderLeftIcon={() => (
-          <AntDesign
-            style={styles.icon}
-            color="black"
-            name="Safety"
-            size={20}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View>
+        <StatusBar style="light" />
+        <View style={styles.header}>
+          <Image
+            source={require("../assets/linear.png")}
+            style={styles.linear}
           />
-        )}
-        selectedStyle={styles.selectedStyle}
-      />
-    </View>
+          <View style={styles.info}>
+            <View style={styles.lefttext}>
+              <Text style={{ fontSize: 14, color: "white" }}> Xin chào</Text>
+              <Text style={{ fontSize: 24, color: "white" }}>Ngô Tiến Lộc</Text>
+              <Text style={{ fontSize: 14, color: "white" }}>
+                Công ty cổ phần ABC
+              </Text>
+            </View>
+            <View style={styles.righttext}>
+              <View style={styles.notification}>
+                <TouchableOpacity>
+                  <MaterialCommunityIcons
+                    name="bell-outline"
+                    size={25}
+                    color="white"
+                  />
+                  <View style={styles.badge}></View>
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity>
+                <MaterialCommunityIcons
+                  name="qrcode-scan"
+                  size={25}
+                  color="white"
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <SearchBar style={styles.search} />
+        </View>
+        <View style={styles.content}>
+          {/* Thoát ứng dụng */}
+          <TouchableOpacity style={styles.button}>
+            <MaterialCommunityIcons
+              name="exit-to-app"
+              size={20}
+              color="#5D5D5D"
+            />
+            <Text style={styles.text}>Thoát ứng dụng</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { padding: 16 },
-  dropdown: {
+  header: {
+    backgroundColor: "#409CF0",
+    height: height < 1000 ? height * 0.23 : height * 0.2,
+    paddingHorizontal: 20,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    justifyContent: "flex-start",
+  },
+  search: {
+    position: "absolute",
+    bottom: 0,
+    left: width * 0.1, // 10% từ bên trái màn hình
+    right: width * 0.1, // 10% từ bên phải màn hình
+    top: height < 1000 ? height * 0.2 : height * 0.18,
     height: 50,
-    backgroundColor: "transparent",
-    borderBottomColor: "gray",
-    borderBottomWidth: 0.5,
   },
-  placeholderStyle: {
-    fontSize: 16,
+  info: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    top: height < 1000 ? height * 0.07 : height * 0.1,
   },
-  selectedTextStyle: {
+  lefttext: {
+    rowGap: 10,
+    justifyContent: "center",
+  },
+  righttext: {
+    flexDirection: "row",
+  },
+  notification: {
+    position: "relative",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 20,
+  },
+  badge: {
+    position: "absolute",
+    top: -4,
+    right: -4,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: "red",
+  },
+  linear: {
+    position: "absolute",
+    left: width < 700 ? width * -0.2 : width * -0.1,
+    top: height < 1000 ? height * -0.125 : height * -0.06,
+  },
+  content: {
+    backgroundColor: "#FCFCFC",
+    gap: 35,
+    borderWidth: 1,
+    borderColor: "#409CF0",
+    borderRadius: 20,
+    paddingHorizontal: 30,
+    paddingVertical: 25,
+    //shadow
+    shadowColor: "#409CF0",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.6,
+    shadowRadius: 3,
+    //resize
+    position: "absolute",
+    left: width * 0.05,
+    right: width * 0.05,
+    top: height < 1000 ? height * 0.3 : height * 0.26,
+  },
+  button: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  text: {
+    marginLeft: 10,
     fontSize: 14,
-  },
-  iconStyle: {
-    width: 20,
-    height: 20,
-  },
-  inputSearchStyle: {
-    height: 40,
-    fontSize: 16,
-  },
-  icon: {
-    marginRight: 5,
-  },
-  selectedStyle: {
-    borderRadius: 12,
+    color: "#5D5D5D",
   },
 });
 
-export default HomeScreen;
+export default ProfileScreen;

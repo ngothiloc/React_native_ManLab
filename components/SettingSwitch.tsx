@@ -11,7 +11,7 @@ interface SettingSwitchProps {
 const SettingSwitch: React.FC<SettingSwitchProps> = ({
   text,
   leftIconName, // Icon mặc định
-  leftIconColor = "#303030", // Màu mặc định
+  leftIconColor = "#5D5D5D", // Màu mặc định
 }) => {
   const [isEnabled, setIsEnabled] = useState(false);
 
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 15,
-    color: "#303030",
+    color: "#5D5D5D",
     fontWeight: "400",
   },
   switchContainer: {},

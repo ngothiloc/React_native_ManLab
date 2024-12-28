@@ -12,6 +12,7 @@ import ChoseAvatar from "../components/ChoseAvatar";
 import Nut from "../components/Nut";
 import Tieude from "../components/Tieude";
 import DienTT from "../components/DienTT";
+import { StatusBar } from "expo-status-bar";
 import DropdownComponent from "../components/DropdownComponent";
 
 const EditPersonalScreen = () => {
@@ -23,6 +24,7 @@ const EditPersonalScreen = () => {
       extraScrollHeight={100}
       keyboardShouldPersistTaps="handled"
     >
+      <StatusBar style="dark" />
       <View style={{ paddingHorizontal: 25 }}>
         {/* Avatar */}
         <View style={styles.container}>

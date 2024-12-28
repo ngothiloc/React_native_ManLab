@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, Alert } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { StatusBar } from "expo-status-bar";
+
 import ChoseAvatar from "../components/ChoseAvatar"; // Đường dẫn cần chính xác
 import Nut from "../components/Nut";
 import Tieude from "../components/Tieude";
@@ -56,6 +58,7 @@ const EditCompanyScreen = () => {
       extraScrollHeight={100}
       keyboardShouldPersistTaps="handled"
     >
+      <StatusBar style="dark" />
       <View style={{ paddingHorizontal: 25 }}>
         {/* Avatar */}
         <View style={styles.container}>

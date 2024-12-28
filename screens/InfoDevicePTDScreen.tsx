@@ -19,7 +19,7 @@ const InforDeviceScreen = () => {
     { title: "Số GCN", value: "abc123" },
     { title: "Số tem ", value: "abc123" },
     { title: "Ngày dự kiến ", value: "28/11/2024" },
-    { title: "Trạng thái ", status: "hiệu lực" as const },
+    { title: "Trạng thái ", status: "hết hiệu lực" as const },
   ];
 
   return (

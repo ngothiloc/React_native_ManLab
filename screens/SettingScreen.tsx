@@ -2,11 +2,12 @@ import { View, SafeAreaView } from "react-native";
 import React from "react";
 import SwitchComponent from "../components/SwitchComponent";
 import SettingSwitch from "../components/SettingSwitch";
-import TitleHeder from "../components/TitleHeder";
+import { StatusBar } from "expo-status-bar";
 
 const SettingScreen = () => {
   return (
     <View style={{ paddingHorizontal: 18, backgroundColor: "#fcfcfc" }}>
+      <StatusBar style="dark" />
       <SafeAreaView style={{ marginTop: 25 }}>
         <SettingSwitch
           text="Cảnh báo chứng chỉ"

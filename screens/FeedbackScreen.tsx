@@ -1,28 +1,31 @@
 import { StyleSheet } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-
 // Import screens
 import AllFeedbackScreen from ".//AllFeedbackScreen";
 import PendingFeedbackScreen from ".//PendingFeedbackScreen";
 import CompletedFeedbackScreen from ".//CompletedFeedbackScreen";
+import { StatusBar } from "expo-status-bar";
 
 const Tab = createMaterialTopTabNavigator();
 
 const FeedbackScreen = () => {
   return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarStyle: styles.tabBar,
-        tabBarIndicatorStyle: styles.indicator,
-        tabBarActiveTintColor: "#308BFF",
-        tabBarInactiveTintColor: "#657786",
-        tabBarLabelStyle: styles.tabLabel,
-      }}
-    >
-      <Tab.Screen name="Đã gửi" component={AllFeedbackScreen} />
-      <Tab.Screen name="Đang xử lý" component={PendingFeedbackScreen} />
-      <Tab.Screen name="Đã hoàn thành" component={CompletedFeedbackScreen} />
-    </Tab.Navigator>
+    <>
+      <StatusBar style="dark" />
+      <Tab.Navigator
+        screenOptions={{
+          tabBarStyle: styles.tabBar,
+          tabBarIndicatorStyle: styles.indicator,
+          tabBarActiveTintColor: "#308BFF",
+          tabBarInactiveTintColor: "#657786",
+          tabBarLabelStyle: styles.tabLabel,
+        }}
+      >
+        <Tab.Screen name="Đã gửi" component={AllFeedbackScreen} />
+        <Tab.Screen name="Đang xử lý" component={PendingFeedbackScreen} />
+        <Tab.Screen name="Đã hoàn thành" component={CompletedFeedbackScreen} />
+      </Tab.Navigator>
+    </>
   );
 };
 

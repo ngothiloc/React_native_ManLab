@@ -16,8 +16,8 @@ const SettingNext: React.FC<SettingNextProps> = ({
   text,
   leftIconName,
   rightIconName = "keyboard-backspace",
-  leftIconColor = "#303030",
-  rightIconColor = "#303030",
+  leftIconColor = "#5D5D5D",
+  rightIconColor = "#5D5D5D",
   onPress,
 }) => {
   const navigation = useNavigation();
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 15,
-    color: "#303030",
+    color: "#5D5D5D",
     fontWeight: "400",
   },
 });
