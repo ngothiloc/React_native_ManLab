@@ -1,14 +1,20 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TextInput } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  TextInputProps,
+  ViewStyle,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-interface DienTTProps {
+interface DienTTProps extends TextInputProps {
   text: string;
   leftIconName?: keyof typeof MaterialCommunityIcons.glyphMap;
   rightIconName?: keyof typeof MaterialCommunityIcons.glyphMap;
   leftIconColor?: string;
   rightIconColor?: string;
-  onChangeText?: (text: string) => void; // Thêm prop cho việc nhận giá trị từ TextInput
+  onChangeText?: (text: string) => void;
   keyboardType?:
     | "default"
     | "email-address"
@@ -16,6 +22,7 @@ interface DienTTProps {
     | "phone-pad"
     | "visible-password";
   isError?: boolean;
+  containerStyle?: ViewStyle; // Style cho View bên ngoài
 }
 
 const DienTT: React.FC<DienTTProps> = ({
@@ -24,16 +31,19 @@ const DienTT: React.FC<DienTTProps> = ({
   rightIconName,
   leftIconColor = "#B1B2B2",
   rightIconColor = "#B1B2B2",
-  onChangeText, // Nhận hàm từ prop
+  onChangeText,
   keyboardType = "default",
   isError = false,
+  multiline = false, // Bật nhiều dòng
+  containerStyle, // Tùy chỉnh style container
+  ...rest // Các thuộc tính khác cho TextInput
 }) => {
   const [inputValue, setInputValue] = useState<string>("");
 
   const handleChangeText = (text: string) => {
-    setInputValue(text); // Cập nhật giá trị trong state
+    setInputValue(text);
     if (onChangeText) {
-      onChangeText(text); // Gọi hàm onChangeText từ prop nếu có
+      onChangeText(text);
     }
   };
 
@@ -41,33 +51,37 @@ const DienTT: React.FC<DienTTProps> = ({
     <View
       style={[
         styles.container,
+        containerStyle,
         {
-          borderColor: isError ? "#EE6363" : "#a6acad", // Đổi màu viền
-          shadowColor: isError ? "red" : "#000", // Đổi màu shadow
+          borderColor: isError ? "#EE6363" : "#a6acad",
+          shadowColor: isError ? "red" : "#000",
         },
       ]}
     >
-      <MaterialCommunityIcons
-        name={leftIconName}
-        size={20}
-        color={isError ? "#EE6363" : leftIconColor}
-      />
+      {leftIconName && (
+        <MaterialCommunityIcons
+          name={leftIconName}
+          size={20}
+          color={isError ? "#EE6363" : leftIconColor}
+        />
+      )}
       <TextInput
         placeholder={text}
         placeholderTextColor={isError ? "#EE6363" : "#B1B2B2"}
-        style={styles.input}
-        // secureTextEntry={true}
-        value={inputValue} // Gán giá trị state vào TextInput
-        onChangeText={handleChangeText} // Gọi handleChangeText khi giá trị thay đổi
+        style={[styles.input, multiline && { textAlignVertical: "top" }]} // Tự căn chỉnh cho nhiều dòng
+        value={inputValue}
+        onChangeText={handleChangeText}
         keyboardType={keyboardType}
+        multiline={multiline}
+        {...rest} // Gán thêm các thuộc tính tùy chỉnh
       />
-      <View>
+      {rightIconName && (
         <MaterialCommunityIcons
           name={rightIconName}
           size={16}
           color={rightIconColor}
         />
-      </View>
+      )}
     </View>
   );
 };
@@ -82,9 +96,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     paddingHorizontal: 10,
     gap: 10,
-    height: 50,
+    height: 50, // Chiều cao mặc định
     justifyContent: "space-between",
-    //shadow
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.1,

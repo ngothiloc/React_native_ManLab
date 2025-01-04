@@ -18,7 +18,7 @@ import DropdownComponent from "../components/DropdownComponent";
 const EditPersonalScreen = () => {
   return (
     <KeyboardAwareScrollView
-      style={{ flex: 1, backgroundColor: "#ffffff" }}
+      style={{ flex: 1, backgroundColor: "#FCFCFC" }}
       contentContainerStyle={{ flexGrow: 1, paddingTop: 15 }}
       enableOnAndroid={true}
       extraScrollHeight={100}

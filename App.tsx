@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { StatusBar } from "expo-status-bar";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import {
   StyleSheet,
   Text,
@@ -30,6 +31,12 @@ import InfoDevicePTDScreen from "./screens/InfoDevicePTDScreen";
 import InfoDeviceScreen from "./screens/InfoDeviceScreen";
 import FeedbackScreen from "./screens/FeedbackScreen";
 import ExecutionHistory from "./screens/ExecutionHistory";
+import PostFeedBack from "./screens/PostFeedBackScreen";
+
+type RootStackParamList = {
+  PostFeedBack: undefined;
+  AddDeviceScreen: undefined;
+};
 
 const Stack = createStackNavigator();
 const MenuBar = createBottomTabNavigator();
@@ -54,7 +61,7 @@ function TabNavigator() {
     // Hành động khi nhấn vào nút giữa
     alert("Đã nhấn vào nút giữ!");
   };
-
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   return (
     <MenuBar.Navigator
       initialRouteName="ProfileScreen"
@@ -82,9 +89,30 @@ function TabNavigator() {
         name="PTDScreen"
         component={PTDScreen}
         options={{
-          title: "PTD",
+          title: "Phương tiện đo",
+          headerLeftContainerStyle: {
+            paddingLeft: 10,
+          },
+          headerRightContainerStyle: {
+            paddingRight: 20,
+          },
+          headerStyle: {
+            height: 120,
+          },
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="gauge" color={color} size={size} />
+          ),
+          headerRight: () => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("AddDeviceScreen")}
+            >
+              <MaterialCommunityIcons
+                name="plus-circle-outline"
+                size={25}
+                color="#656565"
+                style={{ marginRight: 20 }}
+              />
+            </TouchableOpacity>
           ),
         }}
       />
@@ -145,7 +173,9 @@ function TabNavigator() {
             />
           ),
           headerRight: () => (
-            <TouchableOpacity onPress={() => alert("Đã bấm vào icon!")}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("PostFeedBack")}
+            >
               <MaterialCommunityIcons
                 name="plus-circle-outline"
                 size={25}
@@ -373,6 +403,23 @@ export default function App() {
           component={ExecutionHistory}
           options={{
             title: "Lịch sử thực hiện",
+            headerBackTitle: "",
+            headerLeftContainerStyle: {
+              paddingLeft: 10,
+            },
+            headerRightContainerStyle: {
+              paddingRight: 20,
+            },
+            headerStyle: {
+              height: 120,
+            },
+          }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="PostFeedBack"
+          component={PostFeedBack}
+          options={{
+            title: "Gửi phản hồi",
             headerBackTitle: "",
             headerLeftContainerStyle: {
               paddingLeft: 10,

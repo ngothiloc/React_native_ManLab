@@ -52,8 +52,8 @@ const Status = ({ status }: StatusProps) => {
 const styles = StyleSheet.create({
   container: {
     borderRadius: 20,
-    paddingVertical: 4,
-    paddingHorizontal: 15,
+    paddingVertical: 3,
+    paddingHorizontal: 7,
   },
   text: {
     color: "#ffffff",

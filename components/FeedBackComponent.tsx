@@ -1,28 +1,36 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-const FeedBackComponent = () => {
+
+interface FeedBackComponentProps {
+  code: string;
+  title: string;
+  avatar: string;
+  onPress: () => void;
+}
+
+const FeedBackComponent: React.FC<FeedBackComponentProps> = ({
+  code,
+  title,
+  avatar,
+  onPress,
+}) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.content}>
         <View style={styles.avatarContainer}>
           <Image
-            source={require("../assets/person.png")}
+            source={{ uri: avatar }} // Dùng URI cho ảnh động
             style={styles.avatar}
           />
         </View>
         <View>
-          <Text style={styles.code}>Mã phản hồi</Text>
-          <Text style={styles.title}>Tiêu đề phản hồi</Text>
+          <Text style={styles.code}>{code}</Text>
+          <Text style={styles.title}>{title}</Text>
         </View>
       </View>
       <View>
-        <MaterialCommunityIcons
-          name="arrow-right"
-          size={25}
-          color="#303030"
-          // style={{ transform: [{ scaleX: -1 }] }}
-        />
+        <MaterialCommunityIcons name="arrow-right" size={25} color="#303030" />
       </View>
     </TouchableOpacity>
   );
@@ -41,6 +49,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 10,
     height: 84,
+    marginBottom: 10,
   },
   content: {
     flexDirection: "row",

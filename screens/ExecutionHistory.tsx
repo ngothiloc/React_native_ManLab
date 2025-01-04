@@ -12,12 +12,16 @@ const ExecutionHistory = () => {
       status: "hiệu lực",
       qrCodeLink:
         "https://via.assets.so/album.png?id=1&q=95&w=360&h=360&fit=fill",
+      avatarLink:
+        "https://via.assets.so/album.png?id=1&q=95&w=360&h=360&fit=fill",
     },
     {
       id: "2",
       name: "Thiết bị 2",
       status: "hết hiệu lực",
       qrCodeLink:
+        "https://via.assets.so/album.png?id=1&q=95&w=360&h=360&fit=fill",
+      avatarLink:
         "https://via.assets.so/album.png?id=1&q=95&w=360&h=360&fit=fill",
     },
     {
@@ -26,6 +30,8 @@ const ExecutionHistory = () => {
       status: "sắp hết hiệu lực",
       qrCodeLink:
         "https://via.assets.so/album.png?id=1&q=95&w=360&h=360&fit=fill",
+      avatarLink:
+        "https://via.assets.so/album.png?id=1&q=95&w=360&h=360&fit=fill",
     },
     {
       id: "4",
@@ -33,12 +39,16 @@ const ExecutionHistory = () => {
       status: "huỷ bỏ",
       qrCodeLink:
         "https://via.assets.so/album.png?id=1&q=95&w=360&h=360&fit=fill",
+      avatarLink:
+        "https://via.assets.so/album.png?id=1&q=95&w=360&h=360&fit=fill",
     },
     {
       id: "5",
       name: "Thiết bị 5",
       status: "chờ cấp mới",
       qrCodeLink:
+        "https://via.assets.so/album.png?id=1&q=95&w=360&h=360&fit=fill",
+      avatarLink:
         "https://via.assets.so/album.png?id=1&q=95&w=360&h=360&fit=fill",
     },
   ];
@@ -68,6 +78,7 @@ const ExecutionHistory = () => {
                 | "sắp hết hiệu lực"
             }
             qrCodeLink={item.qrCodeLink}
+            avatarLink={item.avatarLink}
           />
         )}
         contentContainerStyle={styles.card}
@@ -84,6 +95,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fcfcfc",
     paddingTop: 15,
+    flex: 1,
   },
   sort: {
     flexDirection: "row",
@@ -93,6 +105,7 @@ const styles = StyleSheet.create({
   card: {
     paddingHorizontal: 13,
     paddingBottom: 15,
+    marginVertical: 15,
   },
 });
 

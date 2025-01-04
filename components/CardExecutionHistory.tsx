@@ -30,12 +30,14 @@ type CardExecutionHistoryProps = {
     | "chờ cấp mới"
     | "sắp hết hiệu lực";
   qrCodeLink: string; // Link hình ảnh mã QR
+  avatarLink: string;
 };
 
 const CardExecutionHistory: React.FC<CardExecutionHistoryProps> = ({
   name,
   status,
   qrCodeLink,
+  avatarLink,
 }) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [modalVisible, setModalVisible] = useState(false); // State để hiển thị modal
@@ -63,7 +65,7 @@ const CardExecutionHistory: React.FC<CardExecutionHistoryProps> = ({
         <View style={styles.content2}>
           <View style={{ alignItems: "center" }}>
             <Image
-              source={require("../assets/person.png")}
+              source={{ uri: avatarLink }}
               style={{
                 width: 80,
                 height: 80,
@@ -99,7 +101,7 @@ const CardExecutionHistory: React.FC<CardExecutionHistoryProps> = ({
         >
           <Image
             source={{ uri: qrCodeLink }}
-            style={{ width: 200, height: 200 }}
+            style={{ width: 400, height: 400 }}
           />
           <TouchableOpacity
             style={{
