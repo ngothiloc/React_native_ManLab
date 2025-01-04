@@ -87,7 +87,7 @@ const LoginScreens = () => {
   };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={{ backgroundColor: "#ffffff" }}>
+      <View style={{ backgroundColor: "#ffffff", flex: 1 }}>
         <Image source={require("../assets/Blur.png")}></Image>
         <KeyboardAwareScrollView>
           <SafeAreaView>
@@ -194,7 +194,7 @@ const LoginScreens = () => {
             </View>
           </SafeAreaView>
         </KeyboardAwareScrollView>
-        <View style={{ margin: 1000 }}></View>
+        {/* <View style={{ margin: 1000 }}></View> */}
       </View>
     </TouchableWithoutFeedback>
   );

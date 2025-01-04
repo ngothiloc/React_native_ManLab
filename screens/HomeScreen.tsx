@@ -75,7 +75,7 @@ const ProfileScreen = () => {
       >
         <StatusBar style="light" />
         <Header />
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View>
             <View style={styles.boxInfo}>
               <BoxInfo />

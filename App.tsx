@@ -64,7 +64,7 @@ function TabNavigator() {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   return (
     <MenuBar.Navigator
-      initialRouteName="ProfileScreen"
+      initialRouteName="HomeScreen"
       screenOptions={{
         tabBarActiveTintColor: "#308BFF",
         tabBarInactiveTintColor: "gray",
@@ -110,7 +110,7 @@ function TabNavigator() {
                 name="plus-circle-outline"
                 size={25}
                 color="#656565"
-                style={{ marginRight: 20 }}
+                // style={{ marginRight: 10 }}
               />
             </TouchableOpacity>
           ),
@@ -203,7 +203,7 @@ function TabNavigator() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="MainScreen">
+      <Stack.Navigator initialRouteName="LoginScreens">
         <Stack.Screen
           name="LoginScreens"
           component={LoginScreens}
