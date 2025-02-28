@@ -6,12 +6,13 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import ActionSheet, { ActionSheetRef } from "react-native-actions-sheet";
 import { WebView } from "react-native-webview";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import Overlay from "../components/Overlay";
 
 type RootStackParamList = {};
 
@@ -96,12 +97,22 @@ const QRCodeScannerScreen: React.FC = () => {
         <MaterialCommunityIcons name="chevron-left" size={35} color="white" />
       </TouchableOpacity>
 
+      {/* chu thong bao */}
+      <View style={styles.warning}>
+        <Text style={{ color: "white" }}>
+          Vui lòng để mã QRcode trong khung hình
+        </Text>
+      </View>
+
+      {/* button flash */}
+
       {/* Camera */}
       <CameraView
         style={styles.camera}
         facing="back"
         onBarcodeScanned={handleBarCodeScanned}
       />
+      <Overlay />
 
       {/* Vùng quét */}
       <View style={styles.scanBox} />
@@ -140,13 +151,21 @@ const styles = StyleSheet.create({
     padding: 20,
   },
 
+  warning: {
+    position: "absolute",
+    top: "33%", // Đặt vị trí theo 33% chiều cao màn hình
+    width: SCREEN_WIDTH * 1, // Chiều rộng = 80% màn hình
+    alignItems: "center", // Căn giữa theo chiều ngang
+    zIndex: 10,
+  },
+
   /* Vùng quét QR */
   scanBox: {
     position: "absolute",
     width: SCAN_BOX_SIZE,
     height: SCAN_BOX_SIZE,
-    borderWidth: 2,
-    borderColor: "red",
+    borderWidth: 4,
+    borderColor: "rgba(0,0,0,0.7)",
     borderRadius: 10,
     top: (SCREEN_HEIGHT - SCAN_BOX_SIZE) / 2,
     left: (SCREEN_WIDTH - SCAN_BOX_SIZE) / 2,
