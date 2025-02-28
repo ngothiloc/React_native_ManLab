@@ -32,10 +32,12 @@ import InfoDeviceScreen from "./screens/InfoDeviceScreen";
 import FeedbackScreen from "./screens/FeedbackScreen";
 import ExecutionHistory from "./screens/ExecutionHistory";
 import PostFeedBack from "./screens/PostFeedBackScreen";
+import QRCodeScannerScreen from "./screens/QRCodeScannerScreen";
 
 type RootStackParamList = {
   PostFeedBack: undefined;
   AddDeviceScreen: undefined;
+  QRCodeScannerScreen: undefined;
 };
 
 const Stack = createStackNavigator();
@@ -123,7 +125,7 @@ function TabNavigator() {
         options={{
           tabBarButton: (props) => (
             <TouchableOpacity
-              onPress={handleCenterButtonPress}
+              onPress={() => navigation.navigate("QRCodeScannerScreen")}
               style={{
                 position: "absolute",
                 top: -20,
@@ -203,7 +205,7 @@ function TabNavigator() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="LoginScreens">
+      <Stack.Navigator initialRouteName="MainScreen">
         <Stack.Screen
           name="LoginScreens"
           component={LoginScreens}
@@ -430,6 +432,13 @@ export default function App() {
             headerStyle: {
               height: 120,
             },
+          }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="QRCodeScannerScreen"
+          component={QRCodeScannerScreen}
+          options={{
+            headerShown: false,
           }}
         ></Stack.Screen>
         <Stack.Screen
