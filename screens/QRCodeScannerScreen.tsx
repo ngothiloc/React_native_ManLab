@@ -26,6 +26,7 @@ const QRCodeScannerScreen: React.FC = () => {
     {}
   );
   const [activeLink, setActiveLink] = useState<string | null>(null);
+  const [isWebViewVisible, setIsWebViewVisible] = useState(false); // Trạng thái WebView
   const actionSheetRef = useRef<ActionSheetRef>(null);
   const [permission, requestPermission] = useCameraPermissions();
 
@@ -52,7 +53,7 @@ const QRCodeScannerScreen: React.FC = () => {
   }
 
   const handleBarCodeScanned = (event: { data: string; bounds?: any }) => {
-    if (!event.bounds) return;
+    if (!event.bounds) return; // Nếu WebView đang hiển thị thì không quét mã QR
 
     const { origin, size } = event.bounds;
     const qrCenterX = origin.x + size.width / 2;
@@ -74,19 +75,23 @@ const QRCodeScannerScreen: React.FC = () => {
       ) {
         if (
           !scannedLinks[event.data] ||
-          now - scannedLinks[event.data] > 2000 //chỉ quét lại được sau 2s
+          now - scannedLinks[event.data] > 0 //chỉ quét lại được sau 2s
         ) {
           setActiveLink(event.data);
           actionSheetRef.current?.show();
           setScannedLinks((prev) => ({ ...prev, [event.data]: now }));
+          // setIsWebViewVisible(true); // Hiển thị WebView khi quét mã QR
         }
       }
     }
   };
+
   const closeBottomSheet = () => {
     actionSheetRef.current?.hide();
     setActiveLink(null);
+    // setIsWebViewVisible(true); // Đóng WebView và mở lại camera
   };
+
   return (
     <View style={styles.container}>
       {/* Nut back */}
