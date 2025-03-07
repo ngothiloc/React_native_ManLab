@@ -15,6 +15,7 @@ interface DropdownComponentProps {
   searchEnabled?: boolean;
   iconName?: keyof typeof MaterialCommunityIcons.glyphMap; // Prop để thay đổi icon
   dropdownPosition?: "auto" | "top" | "bottom";
+  disabled?: boolean;
 }
 
 const DropdownComponent: React.FC<DropdownComponentProps> = ({

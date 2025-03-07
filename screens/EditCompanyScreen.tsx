@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, Alert } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { StatusBar } from "expo-status-bar";
@@ -8,47 +8,18 @@ import Nut from "../components/Nut";
 import Tieude from "../components/Tieude";
 import DienTT from "../components/DienTT";
 import DropdownComponent from "../components/DropdownComponent";
+import apiLocationData from "../src/apiLocationData";
 
 const EditCompanyScreen = () => {
-  const [selectedValue, setSelectedValue] = useState<string | number | null>(
-    null
-  );
-  const [selectedValue2, setSelectedValue2] = useState<string | number | null>(
-    null
-  );
-  const [selectedValue3, setSelectedValue3] = useState<string | number | null>(
-    null
-  );
-
-  const dataCity = [
-    { label: "Thành phố Hà Nội", value: "Hà Nội" },
-    { label: "Thành phố Hồ Chí Minh", value: "Hồ Chí Minh" },
-    { label: "Thành phố Đà Nẵng", value: "Đà Nẵng" },
-    { label: "Thành phố Hải Phòng", value: "Hải Phòng" },
-  ];
-
-  const dataDistrict = [
-    { label: "Quận Ba Đình", value: "Ba Đình" },
-    { label: "Quận Cầu Giấy", value: "Cầu Giấy" },
-    { label: "Quận Đống Đa", value: "Đống Đa" },
-    { label: "Quận Hà Đông", value: "Hà Đông" },
-  ];
-
-  const dataWard = [
-    { label: "Phường Mỹ Đình", value: "Mỹ Đình" },
-    { label: "Phường Cầu Diễn", value: "Cầu Diễn" },
-    { label: "Phường Thanh Xuân Trung", value: "Thanh Xuân Trung" },
-  ];
-
-  const handleValueChange = (value: string | number) => {
-    setSelectedValue(value);
-  };
-  const handleValueChange2 = (value: string | number) => {
-    setSelectedValue2(value);
-  };
-  const handleValueChange3 = (value: string | number) => {
-    setSelectedValue3(value);
-  };
+  const {
+    cities,
+    districts,
+    wards,
+    selectedCity,
+    selectedDistrict,
+    handleCityChange,
+    handleDistrictChange,
+  } = apiLocationData();
 
   return (
     <KeyboardAwareScrollView
@@ -94,29 +65,31 @@ const EditCompanyScreen = () => {
         <Tieude text="Địa chỉ" />
         <Text style={styles.titleInput}>Tỉnh / Thành phố</Text>
         <DropdownComponent
-          data={dataCity}
-          placeholder="Tỉnh / Thành phố"
-          onValueChange={handleValueChange}
-          searchEnabled={true}
+          data={cities.map((city) => ({ label: city.name, value: city.code }))} // Chuyển đổi dữ liệu
+          placeholder="Chọn Tỉnh / Thành phố"
+          onValueChange={handleCityChange}
           iconName="account-search-outline"
         />
 
         <Text style={[styles.titleInput, { marginTop: 10 }]}>Quận / Huyện</Text>
         <DropdownComponent
-          data={dataDistrict}
-          placeholder="Quận / Huyện"
-          onValueChange={handleValueChange2}
-          searchEnabled={true}
+          data={districts.map((district) => ({
+            label: district.name,
+            value: district.code,
+          }))} // Chuyển đổi dữ liệu
+          placeholder="Chọn Quận / Huyện"
+          onValueChange={handleDistrictChange}
           iconName="account-search-outline"
+          disabled={!selectedCity}
         />
 
         <Text style={[styles.titleInput, { marginTop: 10 }]}>Phường / Xã</Text>
         <DropdownComponent
-          data={dataWard}
-          placeholder="Phường / Xã"
-          onValueChange={handleValueChange3}
-          searchEnabled={true}
+          data={wards.map((ward) => ({ label: ward.name, value: ward.code }))} // Chuyển đổi dữ liệu
+          placeholder="Chọn Phường / Xã"
+          onValueChange={(ward) => console.log("Selected Ward:", ward)}
           iconName="account-search-outline"
+          disabled={!selectedDistrict}
         />
 
         <Text style={[styles.titleInput, { marginTop: 10 }]}>
