@@ -1,4 +1,5 @@
-import { NewsItem } from '../types/homeScreen';
+import { NewsItem } from '../types/news';
+import { decodeHtmlEntities } from '../utils/htmlDecoder';
 
 export const fetchNewsFromWordPress = async (): Promise<NewsItem[]> => {
   try {
@@ -26,12 +27,13 @@ export const fetchNewsFromWordPress = async (): Promise<NewsItem[]> => {
 
         return {
           id: post.id,
-          title: post.title.rendered,
+          title: decodeHtmlEntities(post.title.rendered),
           date: new Date(post.date).toLocaleDateString(),
-          content:
+          content: decodeHtmlEntities(
             post.excerpt.rendered
               .replace(/<\/?[^>]+(>|$)/g, "")
-              .substring(0, 150) + "...", // Remove HTML tags and truncate content
+              .substring(0, 120) + "..."
+          ),
           image: imageUrl,
         };
       })

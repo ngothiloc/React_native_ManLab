@@ -18,7 +18,7 @@ import BoxInfo from "../components/homeScreensComponent/BoxInfo";
 import NewsCard from "../components/homeScreensComponent/NewsCard";
 import Header from "../components/Header";
 import { fetchNewsFromWordPress } from "../api/apiNewsWP";
-import { NewsItem } from "../types/homeScreen";
+import { NewsItem } from "../types/news";
 
 const { height, width } = Dimensions.get("window");
 

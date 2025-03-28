@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { NewsItem } from "../../types/homeScreen";
+import { NewsItem } from "../../types/news";
 
 const NewsCard = ({ news }: { news: NewsItem[] }) => {
   return (
