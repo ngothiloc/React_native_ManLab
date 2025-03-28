@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions,
   TouchableWithoutFeedback,
+  ActivityIndicator,
   Keyboard,
   ScrollView,
   TouchableOpacity,
@@ -16,53 +17,49 @@ import { StatusBar } from "expo-status-bar";
 import BoxInfo from "../components/homeScreensComponent/BoxInfo";
 import NewsCard from "../components/homeScreensComponent/NewsCard";
 import Header from "../components/Header";
-const { height, width } = Dimensions.get("window");
+import { fetchNewsFromWordPress } from "../api/apiNewsWP";
+import { NewsItem } from "../types/homeScreen";
 
-interface NewsItem {
-  id: number;
-  title: string;
-  date: string;
-  image: any; // Hoặc cụ thể hơn nếu bạn biết kiểu của image
-  news: NewsItem;
-}
+const { height, width } = Dimensions.get("window");
 
 type RootStackParamList = {
   BookingScreen: undefined;
 };
 
 const ProfileScreen = () => {
-  const newsData = [
-    {
-      id: 1,
-      title: "Tiêu đề 1",
-      date: "2025-01-01",
-      image: require("../assets/person.png"),
-    },
-    {
-      id: 2,
-      title: "Tiêu đề 2",
-      date: "2025-01-02",
-      image: require("../assets/person.png"),
-    },
-    {
-      id: 3,
-      title: "Tiêu đề 2",
-      date: "2025-01-02",
-      image: require("../assets/person.png"),
-    },
-    {
-      id: 4,
-      title: "Tiêu đề 2",
-      date: "2025-01-02",
-      image: require("../assets/person.png"),
-    },
-    {
-      id: 5,
-      title: "Tiêu đề 2",
-      date: "2025-01-02",
-      image: require("../assets/person.png"),
-    },
-  ];
+  const [newsData, setNewsData] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [displayedNews, setDisplayedNews] = useState<NewsItem[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const news = await fetchNewsFromWordPress();
+        setNewsData(news);
+        // Initialize with first 5 items
+        setDisplayedNews(news.slice(0, itemsPerPage));
+      } catch (error) {
+        console.error("Error fetching news:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNews();
+  }, []);
+
+  const handleLoadMore = () => {
+    const nextPage = currentPage + 1;
+    const startIndex = 0;
+    const endIndex = nextPage * itemsPerPage;
+
+    if (endIndex <= newsData.length) {
+      setDisplayedNews(newsData.slice(startIndex, endIndex));
+      setCurrentPage(nextPage);
+    }
+  };
 
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   return (
@@ -102,13 +99,20 @@ const ProfileScreen = () => {
                 Tin tức kiểm định
               </Text>
               <View style={styles.newsCard}>
-                <NewsCard news={newsData as NewsItem[]} />
+                {loading ? (
+                  <ActivityIndicator size="large" color="#409CF0" />
+                ) : (
+                  <NewsCard news={displayedNews} />
+                )}
               </View>
-              <TouchableOpacity
-                style={{ alignItems: "center", marginBottom: 40 }}
-              >
-                <Text>Xem thêm</Text>
-              </TouchableOpacity>
+              {displayedNews.length < newsData.length && (
+                <TouchableOpacity
+                  style={styles.loadMoreButton}
+                  onPress={handleLoadMore}
+                >
+                  <Text style={styles.loadMoreText}>Xem thêm</Text>
+                </TouchableOpacity>
+              )}
             </View>
           </View>
         </ScrollView>
@@ -156,6 +160,16 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 1,
     shadowRadius: 1.5,
+  },
+  loadMoreButton: {
+    alignItems: "center",
+    marginBottom: 40,
+    padding: 10,
+  },
+  loadMoreText: {
+    color: "#409CF0",
+    fontSize: 16,
+    fontWeight: "600",
   },
 });
 

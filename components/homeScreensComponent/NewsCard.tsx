@@ -1,51 +1,28 @@
 import React from "react";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  FlatList,
-} from "react-native";
-
-interface NewsItem {
-  id: number;
-  title: string;
-  date: string;
-  image: any; // Hoặc cụ thể hơn nếu bạn biết kiểu của image
-  news: NewsItem;
-}
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { NewsItem } from "../../types/homeScreen";
 
 const NewsCard = ({ news }: { news: NewsItem[] }) => {
   return (
     <View>
       {news.map((item) => (
-        <TouchableOpacity key={item.id}>
+        <TouchableOpacity
+          key={item.id}
+          onPress={() => console.log(`Mở bài viết: ${item.id}`)}
+        >
           <View style={styles.container}>
-            <Image
-              source={require("../../assets/person.png")}
-              style={{ width: 80, height: 80 }}
-              resizeMode="contain"
-            />
+            <Image source={{ uri: item.image }} style={styles.image} />
             <View style={styles.textContainer}>
-              <View style={styles.content}>
-                <Text
-                  style={{ fontSize: 15, color: "#5D5D5D", fontWeight: "600" }}
-                >
-                  {item.title}
-                </Text>
-              </View>
-              <View style={styles.date}>
-                <Text
-                  style={{
-                    fontSize: 13,
-                    color: "#7F7F7F",
-                    fontWeight: "400",
-                    fontStyle: "italic",
-                  }}
-                >
-                  {item.date}
-                </Text>
+              <Text style={styles.title}>{item.title}</Text>
+              <Text style={styles.content}>{item.content}</Text>
+              <View style={styles.datetime}>
+                <MaterialCommunityIcons
+                  name="calendar"
+                  color={"#8F9098"}
+                  size={18}
+                />
+                <Text style={styles.date}>{item.date}</Text>
               </View>
             </View>
           </View>
@@ -54,9 +31,10 @@ const NewsCard = ({ news }: { news: NewsItem[] }) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    flexDirection: "column",
     borderWidth: 1,
     padding: 10,
     borderRadius: 20,
@@ -64,17 +42,36 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginBottom: 10,
   },
+  image: {
+    width: "100%",
+    height: 150,
+    borderRadius: 10,
+  },
   textContainer: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "space-around",
-    marginLeft: 10,
+    marginTop: 10,
+  },
+  title: {
+    fontSize: 15,
+    color: "#5D5D5D",
+    fontWeight: "600",
   },
   content: {
-    justifyContent: "flex-start",
+    fontSize: 14,
+    color: "#5D5D5D",
+    fontWeight: "500",
+    marginTop: 5,
+  },
+  datetime: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    gap: 7,
   },
   date: {
-    justifyContent: "flex-end",
+    fontSize: 13,
+    color: "#7F7F7F",
+    fontWeight: "400",
+    fontStyle: "italic",
   },
 });
 
