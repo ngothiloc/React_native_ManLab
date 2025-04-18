@@ -33,11 +33,13 @@ import FeedbackScreen from "./screens/FeedbackScreen";
 import ExecutionHistory from "./screens/ExecutionHistory";
 import PostFeedBack from "./screens/PostFeedBackScreen";
 import QRCodeScannerScreen from "./screens/QRCodeScannerScreen";
+import PTD_search_screen from "./screens/PTD_search_screen";
 
 type RootStackParamList = {
   PostFeedBack: undefined;
   AddDeviceScreen: undefined;
   QRCodeScannerScreen: undefined;
+  PTD_search_screen: undefined;
 };
 
 const Stack = createStackNavigator();
@@ -422,6 +424,23 @@ export default function App() {
           component={PostFeedBack}
           options={{
             title: "Gửi phản hồi",
+            headerBackTitle: "",
+            headerLeftContainerStyle: {
+              paddingLeft: 10,
+            },
+            headerRightContainerStyle: {
+              paddingRight: 20,
+            },
+            headerStyle: {
+              height: 120,
+            },
+          }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="PTD_search_screen"
+          component={PTD_search_screen}
+          options={{
+            title: "Tìm kiếm",
             headerBackTitle: "",
             headerLeftContainerStyle: {
               paddingLeft: 10,

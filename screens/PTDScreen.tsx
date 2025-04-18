@@ -4,6 +4,13 @@ import Filter from "../components/Filter";
 import Sort from "../components/Sort";
 import { StatusBar } from "expo-status-bar";
 import PTDBox from "../components/PTDBox";
+import PTD_search_screen from "./PTD_search_screen";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+type RootStackParamList = {
+  PTD_search_screen: undefined;
+};
 
 const deviceData = [
   {
@@ -48,12 +55,14 @@ const deviceData = [
 ];
 
 const PTDScreen = () => {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
       <View style={styles.sort}>
         <Sort />
-        <Filter />
+        <Filter onPress={() => navigation.navigate("PTD_search_screen")} />
       </View>
       <View style={styles.ptdBox}>
         <FlatList

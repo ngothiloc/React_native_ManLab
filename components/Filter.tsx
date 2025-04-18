@@ -7,12 +7,15 @@ import {
 } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const { height, width } = Dimensions.get("window");
 
-const Filter = () => {
+const Filter = ({ onPress }: { onPress: () => void }) => {
+  const navigation = useNavigation();
+
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <MaterialCommunityIcons name="filter-outline" color="#8F9098" />
       <Text style={styles.text}>Lọc</Text>
       <MaterialCommunityIcons name="chevron-down" color="#8F9098" />
