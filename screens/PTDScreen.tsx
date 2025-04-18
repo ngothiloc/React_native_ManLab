@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import Filter from "../components/Filter";
 import Sort from "../components/Sort";
 import { StatusBar } from "expo-status-bar";
 import PTDBox from "../components/PTDBox";
-import PTD_search_screen from "./PTD_search_screen";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
@@ -12,7 +11,7 @@ type RootStackParamList = {
   PTD_search_screen: undefined;
 };
 
-const deviceData = [
+const initialData = [
   {
     deviceName: "Tên thiết bị",
     status: "hiệu lực",
@@ -37,7 +36,7 @@ const deviceData = [
       require("../assets/person.png"),
       require("../assets/person.png"),
     ],
-    date: "01/01/2025",
+    date: "01/01/2023",
   },
   {
     deviceName: "Máy đo",
@@ -50,18 +49,34 @@ const deviceData = [
       require("../assets/person.png"),
       require("../assets/person.png"),
     ],
-    date: "01/01/2025",
+    date: "01/01/2024",
   },
 ];
 
 const PTDScreen = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const [deviceData, setDeviceData] = useState(initialData);
+
+  const handleSortChange = (option: string) => {
+    const sorted = [...deviceData].sort((a, b) => {
+      const [dayA, monthA, yearA] = a.date.split("/").map(Number);
+      const [dayB, monthB, yearB] = b.date.split("/").map(Number);
+      const dateA = new Date(yearA, monthA - 1, dayA);
+      const dateB = new Date(yearB, monthB - 1, dayB);
+
+      return option === "newest"
+        ? dateB.getTime() - dateA.getTime()
+        : dateA.getTime() - dateB.getTime();
+    });
+
+    setDeviceData(sorted);
+  };
 
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
       <View style={styles.sort}>
-        <Sort />
+        <Sort onSortChange={handleSortChange} />
         <Filter onPress={() => navigation.navigate("PTD_search_screen")} />
       </View>
       <View style={styles.ptdBox}>
