@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: width * 0.1, // 10% từ bên trái màn hình
     right: width * 0.1, // 10% từ bên phải màn hình
-    top: height < 1000 ? height * 0.2 : height * 0.18,
+    top: height < 1000 ? height * 0.11 : height * 0.18,
     height: 50,
   },
 });
