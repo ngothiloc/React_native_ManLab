@@ -1,4 +1,5 @@
-import { StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 // Import screens
 import AllFeedbackScreen from ".//AllFeedbackScreen";
@@ -9,6 +10,10 @@ import { StatusBar } from "expo-status-bar";
 const Tab = createMaterialTopTabNavigator();
 
 const FeedbackScreen = () => {
+  const [allCount, setAllCount] = useState(0);
+  const [pendingCount, setPendingCount] = useState(0);
+  const [completedCount, setCompletedCount] = useState(0);
+
   return (
     <>
       <StatusBar style="dark" />
@@ -21,9 +26,26 @@ const FeedbackScreen = () => {
           tabBarLabelStyle: styles.tabLabel,
         }}
       >
-        <Tab.Screen name="Đã gửi" component={AllFeedbackScreen} />
-        <Tab.Screen name="Đang xử lý" component={PendingFeedbackScreen} />
-        <Tab.Screen name="Đã hoàn thành" component={CompletedFeedbackScreen} />
+        <Tab.Screen
+          name={`Đã gửi (${allCount})`}
+          children={() => (
+            <AllFeedbackScreen onFeedbackCountChange={setAllCount} />
+          )}
+        />
+        <Tab.Screen
+          name={`Xử lý (${pendingCount})`}
+          children={() => (
+            <PendingFeedbackScreen onFeedbackCountChange={setPendingCount} />
+          )}
+        />
+        <Tab.Screen
+          name={`Hoàn thành (${completedCount})`}
+          children={() => (
+            <CompletedFeedbackScreen
+              onFeedbackCountChange={setCompletedCount}
+            />
+          )}
+        />
       </Tab.Navigator>
     </>
   );

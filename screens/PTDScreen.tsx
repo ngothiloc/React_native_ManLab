@@ -24,6 +24,12 @@ const initialData = [
       require("../assets/person.png"),
     ],
     date: "01/01/2025",
+    requirement: "Kiểm định",
+    receiveStatus: "Bình thường",
+    returnStatus: "Bình thường",
+    bbdStatus: "Chưa trả",
+    certificateNumber: "GCN123456",
+    sealNumber: "TEM789012",
   },
   {
     deviceName: "Máy đo",
@@ -37,6 +43,12 @@ const initialData = [
       require("../assets/person.png"),
     ],
     date: "01/01/2023",
+    requirement: "Hiệu chuẩn",
+    receiveStatus: "Hư hỏng nhẹ",
+    returnStatus: "Đã sửa chữa",
+    bbdStatus: "Đã trả",
+    certificateNumber: "GCN789012",
+    sealNumber: "TEM345678",
   },
   {
     deviceName: "Máy đo",
@@ -50,6 +62,12 @@ const initialData = [
       require("../assets/person.png"),
     ],
     date: "01/01/2024",
+    requirement: "Kiểm định",
+    receiveStatus: "Bình thường",
+    returnStatus: "Bình thường",
+    bbdStatus: "Chưa trả",
+    certificateNumber: "GCN456789",
+    sealNumber: "TEM123456",
   },
 ];
 
@@ -91,6 +109,12 @@ const PTDScreen = () => {
               serial={item.serial}
               staffImages={item.staffImages}
               date={item.date}
+              requirement={item.requirement}
+              receiveStatus={item.receiveStatus}
+              returnStatus={item.returnStatus}
+              bbdStatus={item.bbdStatus}
+              certificateNumber={item.certificateNumber}
+              sealNumber={item.sealNumber}
             />
           )}
           keyExtractor={(item, index) => index.toString()} // keyExtractor để xác định key cho mỗi phần tử

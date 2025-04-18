@@ -3,23 +3,37 @@ import { View, StyleSheet, ScrollView } from "react-native";
 import InfoRow from "../components/InfoRow";
 import ChoseAvatar from "../components/ChoseAvatar";
 import Tieude from "../components/Tieude";
-const InforDeviceScreen = () => {
+import { useRoute, RouteProp } from "@react-navigation/native";
+import { RootStackParamList } from "../components/PTDBox";
+
+type InfoDevicePTDScreenRouteProp = RouteProp<
+  RootStackParamList,
+  "InfoDevicePTDScreen"
+>;
+
+const InfoDevicePTDScreen = () => {
+  const route = useRoute<InfoDevicePTDScreenRouteProp>();
+  const { deviceData } = route.params;
+
   const dataInfo = [
-    { title: "Tên thiết bị", value: "Tên thiết bị" },
-    { title: "Cơ sở sản xuất", value: "Cơ sở sản xuất" },
-    { title: "Model", value: "Model" },
-    { title: "Serial", value: "Serial" },
-    // { title: "Thông tin 5", status: "hết hiệu lực" }, // Phần tử này có status "huỷ bỏ"
+    { title: "Tên thiết bị", value: deviceData.deviceName || "NULL" },
+    { title: "Cơ sở sản xuất", value: deviceData.companyName || "NULL" },
+    { title: "Model", value: deviceData.model || "NULL" },
+    { title: "Serial", value: deviceData.serial || "NULL" },
   ];
+
   const dataCheck = [
-    { title: "Yêu cầu thực hiện", value: "Kiểm định" },
-    { title: "Tình trạng nhận PTĐ", value: "Bình thường" },
-    { title: "Tình trạng trả PTĐ", value: "Bình thường" },
-    { title: "Tình trạng BBĐL", value: "Chưa trả" },
-    { title: "Số GCN", value: "abc123" },
-    { title: "Số tem ", value: "abc123" },
-    { title: "Ngày dự kiến ", value: "28/11/2024" },
-    { title: "Trạng thái ", status: "hết hiệu lực" as const },
+    { title: "Yêu cầu thực hiện", value: deviceData.requirement || "NULL" },
+    { title: "Tình trạng nhận PTĐ", value: deviceData.receiveStatus || "NULL" },
+    { title: "Tình trạng trả PTĐ", value: deviceData.returnStatus || "NULL" },
+    { title: "Tình trạng BBĐL", value: deviceData.bbdStatus || "NULL" },
+    { title: "Số GCN", value: deviceData.certificateNumber || "NULL" },
+    { title: "Số tem", value: deviceData.sealNumber || "NULL" },
+    { title: "Ngày dự kiến", value: deviceData.date || "NULL" },
+    {
+      title: "Trạng thái",
+      status: deviceData.status as "hết hiệu lực" | "hiệu lực",
+    },
   ];
 
   return (
@@ -46,4 +60,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-export default InforDeviceScreen;
+export default InfoDevicePTDScreen;

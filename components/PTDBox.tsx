@@ -7,6 +7,26 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
+export type RootStackParamList = {
+  InfoDevicePTDScreen: {
+    deviceData: {
+      deviceName: string;
+      status: string;
+      companyName: string;
+      model: string;
+      serial: string;
+      staffImages: any[];
+      date: string;
+      requirement: string;
+      receiveStatus: string;
+      returnStatus: string;
+      bbdStatus: string;
+      certificateNumber: string;
+      sealNumber: string;
+    };
+  };
+};
+
 interface PTDBoxProps {
   deviceName: string;
   status: string;
@@ -15,11 +35,13 @@ interface PTDBoxProps {
   serial: string;
   staffImages: any[];
   date: string;
+  requirement: string;
+  receiveStatus: string;
+  returnStatus: string;
+  bbdStatus: string;
+  certificateNumber: string;
+  sealNumber: string;
 }
-
-type RootStackParamList = {
-  InfoDeviceScreen: undefined;
-};
 
 const PTDBox: React.FC<PTDBoxProps> = ({
   deviceName,
@@ -29,13 +51,37 @@ const PTDBox: React.FC<PTDBoxProps> = ({
   serial,
   staffImages,
   date,
+  requirement,
+  receiveStatus,
+  returnStatus,
+  bbdStatus,
+  certificateNumber,
+  sealNumber,
 }) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate("InfoDeviceScreen")}
+      onPress={() =>
+        navigation.navigate("InfoDevicePTDScreen", {
+          deviceData: {
+            deviceName,
+            status,
+            companyName,
+            model,
+            serial,
+            staffImages,
+            date,
+            requirement,
+            receiveStatus,
+            returnStatus,
+            bbdStatus,
+            certificateNumber,
+            sealNumber,
+          },
+        })
+      }
     >
       <View style={styles.title}>
         <Image

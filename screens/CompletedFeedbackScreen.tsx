@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import FeedBackComponent from "../components/FeedBackComponent";
 
-const feedbackData = [
+export const completedFeedbackData = [
   {
     code: "FB12345",
     title: "Tiêu đề phản hồi 1",
@@ -21,22 +21,33 @@ const feedbackData = [
   // Bạn có thể thêm nhiều dữ liệu ở đây
 ];
 
-const FeedbackScreen: React.FC = () => (
-  <ScrollView style={styles.tabContent}>
-    {feedbackData.map((feedback, index) => (
-      <FeedBackComponent
-        key={index}
-        code={feedback.code}
-        title={feedback.title}
-        avatar={feedback.avatar}
-        onPress={() => {
-          // Ví dụ xử lý khi nhấn vào phản hồi
-          console.log(`Đã chọn phản hồi với mã ${feedback.code}`);
-        }}
-      />
-    ))}
-  </ScrollView>
-);
+interface CompletedFeedbackScreenProps {
+  onFeedbackCountChange?: (count: number) => void;
+}
+
+const CompletedFeedbackScreen: React.FC<CompletedFeedbackScreenProps> = ({
+  onFeedbackCountChange,
+}) => {
+  React.useEffect(() => {
+    onFeedbackCountChange?.(completedFeedbackData.length);
+  }, [onFeedbackCountChange]);
+
+  return (
+    <ScrollView style={styles.tabContent}>
+      {completedFeedbackData.map((feedback, index) => (
+        <FeedBackComponent
+          key={index}
+          code={feedback.code}
+          title={feedback.title}
+          avatar={feedback.avatar}
+          onPress={() => {
+            console.log(`Đã chọn phản hồi với mã ${feedback.code}`);
+          }}
+        />
+      ))}
+    </ScrollView>
+  );
+};
 
 const styles = StyleSheet.create({
   tabContent: {
@@ -48,4 +59,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FeedbackScreen;
+export default CompletedFeedbackScreen;
