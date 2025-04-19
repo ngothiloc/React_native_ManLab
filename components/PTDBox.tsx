@@ -85,7 +85,7 @@ const PTDBox: React.FC<PTDBoxProps> = ({
     >
       <View style={styles.title}>
         <Image
-          source={require("../assets/person.png")}
+          source={{ uri: "https://loremflickr.com/300/300/nature" }}
           style={{ width: 80, height: 80 }}
         />
         <View

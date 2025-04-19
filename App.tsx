@@ -35,6 +35,7 @@ import PostFeedBack from "./screens/PostFeedBackScreen";
 import QRCodeScannerScreen from "./screens/QRCodeScannerScreen";
 import PTD_search_screen from "./screens/PTD_search_screen";
 import CompanyCompetencyCards from "./screens/CompanyCompetencyCards";
+import ChatBotScreen from "./screens/ChatBotScreen";
 
 type RootStackParamList = {
   PostFeedBack: undefined;
@@ -455,6 +456,23 @@ export default function App() {
         <Stack.Screen
           name="CompanyCompetencyCards"
           component={CompanyCompetencyCards}
+          options={{
+            title: "Tìm kiếm",
+            headerBackTitle: "",
+            headerLeftContainerStyle: {
+              paddingLeft: 10,
+            },
+            headerRightContainerStyle: {
+              paddingRight: 20,
+            },
+            headerStyle: {
+              height: 120,
+            },
+          }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="ChatBotScreen"
+          component={ChatBotScreen}
           options={{
             title: "Tìm kiếm",
             headerBackTitle: "",

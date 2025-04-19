@@ -6,6 +6,7 @@ import AllFeedbackScreen from ".//AllFeedbackScreen";
 import PendingFeedbackScreen from ".//PendingFeedbackScreen";
 import CompletedFeedbackScreen from ".//CompletedFeedbackScreen";
 import { StatusBar } from "expo-status-bar";
+import ChatBotButton from "../components/ChatBotButton";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -47,6 +48,7 @@ const FeedbackScreen = () => {
           )}
         />
       </Tab.Navigator>
+      <ChatBotButton />
     </>
   );
 };

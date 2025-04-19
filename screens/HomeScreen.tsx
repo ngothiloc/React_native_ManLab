@@ -19,6 +19,7 @@ import NewsCard from "../components/homeScreensComponent/NewsCard";
 import Header from "../components/Header";
 import { fetchNewsFromWordPress } from "../api/apiNewsWP";
 import { NewsItem } from "../types/news";
+import ChatBotButton from "../components/ChatBotButton";
 
 const { height, width } = Dimensions.get("window");
 
@@ -127,6 +128,7 @@ const ProfileScreen = () => {
             <Text style={styles.text}>Thoát ứng dụng</Text>
           </TouchableOpacity> */}
         {/* </View> */}
+        <ChatBotButton />
       </View>
     </TouchableWithoutFeedback>
   );
