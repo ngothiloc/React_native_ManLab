@@ -5,8 +5,8 @@
   "main": "index.ts",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web"
   },
   "dependencies": {
@@ -15,7 +15,6 @@
     "@expo/vector-icons": "^14.0.2",
     "@gorhom/bottom-sheet": "^5.0.6",
     "@react-native-picker/picker": "^2.9.0",
-    "@react-native-voice/voice": "^3.1.5",
     "@react-navigation/bottom-tabs": "^7.0.14",
     "@react-navigation/material-top-tabs": "^7.0.14",
     "@react-navigation/native": "^7.0.9",
@@ -40,7 +39,6 @@
     "react-native-paper": "^5.12.5",
     "react-native-svg": "^15.10.1",
     "react-native-tab-view": "^4.0.5",
-    "react-native-voice": "^0.3.0",
     "react-native-webview": "^13.13.2",
     "xml2js": "^0.6.2",
     "xmldom": "^0.6.0"
