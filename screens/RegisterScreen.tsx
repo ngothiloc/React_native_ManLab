@@ -88,7 +88,7 @@ const LoginScreens = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={{ backgroundColor: "#ffffff", flex: 1 }}>
-        <Image source={require("../assets/Blur.png")}></Image>
+        <Image source={require("../assets/top.png")}></Image>
         <KeyboardAwareScrollView>
           <SafeAreaView>
             <View style={{ paddingHorizontal: 25 }}>

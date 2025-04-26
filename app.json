@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Check",
-    "slug": "Check",
+    "slug": "check",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,19 +21,16 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": [
-        "android.permission.CAMERA"
-      ]
+      "permissions": ["android.permission.CAMERA"],
+      "package": "com.ngothiloc.ManLab"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-barcode-scanner"
-    ],
+    "plugins": ["expo-barcode-scanner"],
     "extra": {
       "eas": {
-        "projectId": "c7d07786-9d66-44aa-9777-8981786c3cd7"
+        "projectId": "5888c0fd-e059-478a-96ad-d77567e6529f"
       }
     }
   }
